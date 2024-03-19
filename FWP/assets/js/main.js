@@ -115,18 +115,18 @@ function loadBook(e) {
         const tr = document.createElement('tr');
 
         tr.innerHTML = `
-            <td>${v.isComplete === 'true' ? completedCounter++ : uncompletedCounter++}</td>
+            <td>${v.isComplete === true ? completedCounter++ : uncompletedCounter++}</td>
             <td>${v.title}</td>
             <td>${v.author}</td>
             <td>${v.year}</td>
             <td>
-                <button class="btn ${v.isComplete === 'true' ? 'btn-warning' : 'btn-success'} btn-sm" onclick="changeStatus(${v.id})">
-                    <i class="bi ${v.isComplete === 'true' ? 'bi-arrow-left' : 'bi-arrow-right'}"></i>
+                <button class="btn ${v.isComplete === true ? 'btn-warning' : 'btn-success'} btn-sm" onclick="changeStatus(${v.id})">
+                    <i class="bi ${v.isComplete === true ? 'bi-arrow-left' : 'bi-arrow-right'}"></i>
                 </button>
             </td>
         `;
 
-        if (v.isComplete === 'true') {
+        if (v.isComplete) {
             bookCompleted.appendChild(tr);
         } else {
             bookUncompleted.appendChild(tr);
@@ -136,8 +136,6 @@ function loadBook(e) {
 
 function editBook(e, id) {
     const book = getBook(id);
-
-    console.log(book);
 
     // get parent
     const tr = e.parentElement.parentElement;
@@ -193,7 +191,7 @@ function changeStatus(id) {
     const confirmation = confirm(`Are you sure want to change status of ${book.title}?`);
     if (!confirmation) return;
 
-    book.isComplete = book.isComplete === 'true' ? 'false' : 'true';
+    book.isComplete = book.isComplete === true ? false : true;
 
     updateBook(book);
 

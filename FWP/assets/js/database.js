@@ -27,6 +27,8 @@ const insertBook = (book) => {
     const books = getBooks();
 
     book.id = new Date().getTime().toString();
+    book.year = parseInt(book.year);
+    book.isComplete = book.isComplete === 'true';
 
     books.push(book);
     storage.setItem('books', JSON.stringify(books));
@@ -36,6 +38,11 @@ const updateBook = (book) => {
     const books = getBooks();
 
     const index = books.findIndex((b) => b.id === book.id);
+
+    book.year = parseInt(book.year);
+    book.isComplete = book.isComplete === 'true';
+
+    console.log(book);
     books[index] = book;
 
     storage.setItem('books', JSON.stringify(books));
