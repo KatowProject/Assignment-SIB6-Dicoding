@@ -9,7 +9,7 @@ const getBooks = () => {
 const getBook = (id) => {
     const books = getBooks();
 
-    return books.find((book) => book.id === id);
+    return books.find((book) => book.id == id);
 };
 
 const findBook = (query) => {
@@ -19,7 +19,7 @@ const findBook = (query) => {
         const title = book.title.toLowerCase();
         const search = query.toLowerCase();
 
-        return title.includes(search);
+        return title.includes(search) || book.author.toLowerCase().includes(search);
     });
 };
 
@@ -44,6 +44,6 @@ const updateBook = (book) => {
 const deleteBook = (id) => {
     const books = getBooks();
 
-    const newBooks = books.filter((book) => book.id !== id);
+    const newBooks = books.filter((book) => book.id != id);
     storage.setItem('books', JSON.stringify(newBooks));
 };

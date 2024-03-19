@@ -8,6 +8,9 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+
+    font-family: "Nunito", sans-serif;
+    font-weight: 300;
 }
 
 main {
@@ -18,10 +21,10 @@ footer {
     flex-shrink: 0;
 }
 
-.container-fluid {
-    padding-left: 10%;
-    padding-right: 10%;
-}
+/* .container-fluid {
+    padding-left: 5%;
+    padding-right: 5%;
+} */
 
 /* if in mobile */
 @media (max-width: 768px) {
