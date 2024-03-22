@@ -29,7 +29,7 @@ class FormContent extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.addNote(this.state);
+        this.props.onSubmit(this.state);
 
         this.setState({
             title: '',
