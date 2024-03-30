@@ -1,3 +1,5 @@
+import HTMLReactParser from "html-react-parser";
+
 const showFormattedDate = (date) => {
   const options = {
     weekday: 'long',
@@ -8,4 +10,8 @@ const showFormattedDate = (date) => {
   return new Date(date).toLocaleDateString('id-ID', options);
 };
 
-export { showFormattedDate };
+const parsingtoHTML = (string) => {
+  return HTMLReactParser(string);
+}
+
+export { showFormattedDate, parsingtoHTML};
