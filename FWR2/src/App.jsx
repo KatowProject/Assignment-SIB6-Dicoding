@@ -4,10 +4,11 @@ import AuthContext from './contexts/AuthContext';
 import LangContext from './contexts/LangContext';
 import ThemeContext from './contexts/ThemeContext';
 import { getUserLogged } from './utils/network-data';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import PrivateRoute from './routes/PrivateRoutes';
 import PublicRoute from './routes/PublicRoutes';
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   const [auth, setAuth] = useState(null);
@@ -54,13 +55,19 @@ function App() {
               <>
                 <Routes>
                   <Route path='/' element={<PrivateRoute />}>
-                    <Route path="" element={<div>Dashboard</div>} />
+                    <Route path='' element={<Navigate to='/notes' />} />
+                    <Route path="notes" element={<div>Dashboard</div>} />
+                    <Route path='notes/archived' element={<div>Archive</div>} />
+                    <Route path='notes/new' element={<div>Trash</div>} />
+                    <Route path='notes/:id' element={<div>Note Detail</div>} />
                   </Route>
 
                   <Route path='/auth' element={<PublicRoute />}>
                     <Route path='login' element={<Login />} />
-                    <Route path='register' element={<div>Register</div>} />
+                    <Route path='register' element={<Register />} />
                   </Route>
+
+                  <Route path='*' element={<div>Not Found</div>} />
                 </Routes>
               </>
             )}

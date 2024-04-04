@@ -1,0 +1,34 @@
+{
+    "header": {
+        "title": "Notes App"
+    },
+    "login": {
+        "title": "Login to use app, please.",
+        "email": "Email",
+        "password": "Password",
+        "buttonSubmit": "Login",
+        "desc": "Don't have an account? ",
+        "buttonRegister": "Register Now"
+    },
+    "register": {
+        "title": "Fill the form to register account.",
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "passwordConfirmation": "Confirm Password",
+        "buttonSubmit": "Register",
+        "desc": "Already have an account? ",
+        "buttonLogin": "Login Now"
+    },
+    "error": {
+        "email": "Please enter a valid email address",
+        "password": "Password not empty",
+        "login": "Invalid email or password",
+        "server": "Something went wrong, please try again later",
+        "passwordNotMatch": "Password not match"
+    },
+    "success": {
+        "register": "Successfully registered, please login",
+        "login": "Successfully logged in"
+    }
+}
