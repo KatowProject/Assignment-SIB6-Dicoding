@@ -20,6 +20,12 @@
         "desc": "Sudah punya akun? ",
         "buttonLogin": "Login Sekarang"
     },
+    "notes": {
+        "active_title": "Catatan Aktif"
+    },
+    "search_bar": {
+        "placeholder": "Cari catatan..."
+    },
     "error": {
         "email": "Email tidak valid",
         "password": "Password tidak boleh kosong",

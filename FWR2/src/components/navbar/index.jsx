@@ -1,10 +1,11 @@
-import { BsTranslate, BsMoonStars, BsSunrise, BsDoorOpen, BsDoorClosed } from "react-icons/bs";
+import { BsTranslate, BsMoonStars, BsSunrise, BsDoorOpen, BsDoorClosed, BsArchive } from "react-icons/bs";
 import { useContext, useState } from "react";
 import LangContext from "../../contexts/LangContext";
 import ThemeContext from "../../contexts/ThemeContext";
 import AuthContext from "../../contexts/AuthContext";
 import id from '../../i18n/id.json';
 import gb from '../../i18n/gb.json';
+import { Link } from "react-router-dom";
 
 const t = {
     id,
@@ -34,6 +35,12 @@ function Navbar() {
     return (
         <header>
             <h1>{t[lang].header.title}</h1>
+
+            <Link to='/notes/archive' className="button-archive">
+                <BsArchive />
+                Archived
+            </Link>
+
             <button className="toggle-locale" onClick={toggleLocale}>
                 <BsTranslate />
             </button>

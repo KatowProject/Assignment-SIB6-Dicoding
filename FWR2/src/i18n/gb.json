@@ -20,6 +20,12 @@
         "desc": "Already have an account? ",
         "buttonLogin": "Login Now"
     },
+    "notes": {
+        "active_title": "Active Notes"
+    },
+    "search_bar": {
+        "placeholder": "Search notes..."
+    },
     "error": {
         "email": "Please enter a valid email address",
         "password": "Password not empty",

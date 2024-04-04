@@ -245,7 +245,7 @@ main {
 }
 
 .toggle-theme {
-    font-size: 36px
+    font-size: 28px
 }
 
 .toggle-locale {
@@ -296,6 +296,18 @@ main {
     width: 100%
 }
 
+.button-archive {
+    align-items: center;
+    background-color: initial;
+    border: 0;
+    color: #fff;
+    color: var(--on-background);
+    cursor: pointer;
+    display: flex;
+    font-size: 28px;
+    gap: 8px
+}
+
 .button-logout {
     align-items: center;
     background-color: initial;
@@ -310,6 +322,27 @@ main {
 
 .button-logout:hover {
     background-color: var(--error);
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* semi-transparent black */
+    z-index: 9999;
+    /* ensure it's on top of other elements */
+    transition: opacity 1s ease-in-out;
+    opacity: 1;
+}
+
+.loading-overlay.exiting {
+    opacity: 0;
 }
 
 @media screen and (min-width: 650px) {
