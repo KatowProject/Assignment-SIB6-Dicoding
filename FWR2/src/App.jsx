@@ -4,6 +4,10 @@ import AuthContext from './contexts/AuthContext';
 import LangContext from './contexts/LangContext';
 import ThemeContext from './contexts/ThemeContext';
 import { getUserLogged } from './utils/network-data';
+import { Routes, Route } from 'react-router-dom';
+import PrivateRoute from './routes/PrivateRoutes';
+import PublicRoute from './routes/PublicRoutes';
+import Login from './pages/Login';
 
 function App() {
   const [auth, setAuth] = useState(null);
@@ -48,17 +52,16 @@ function App() {
               <div>Loading...</div>
             ) : (
               <>
-                <h1>App</h1>
-                <div>
-                  <button onClick={() => setLang('id')}>ID</button>
-                  <button onClick={() => setLang('gb')}>GB</button>
-                </div>
-                <div>
-                  <button onClick={() => changeTheme(theme === 'light' ? 'dark' : 'light')}>Toggle Theme</button>
-                </div>
-                <div>
-                  <button onClick={() => setAuth(!auth)}>Toggle Auth</button>
-                </div>
+                <Routes>
+                  <Route path='/' element={<PrivateRoute />}>
+                    <Route path="" element={<div>Dashboard</div>} />
+                  </Route>
+
+                  <Route path='/auth' element={<PublicRoute />}>
+                    <Route path='login' element={<Login />} />
+                    <Route path='register' element={<div>Register</div>} />
+                  </Route>
+                </Routes>
               </>
             )}
           </div>
