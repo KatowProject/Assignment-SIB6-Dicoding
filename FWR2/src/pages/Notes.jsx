@@ -1,5 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import propTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { BiSolidBookAdd } from 'react-icons/bi';
 
 import SearchNote from '../components/notes/SearchBar';
 import NoteList from "../components/notes/List";
@@ -18,7 +20,7 @@ function NotesPage() {
     const [keyword, setKeyword] = useState("");
     const { lang } = useContext(LangContext);
 
-    const handleSearch = (keyword) => {
+    function handleSearch(keyword) {
         setKeyword(keyword);
     }
 
@@ -49,7 +51,12 @@ function NotesPage() {
                 <NoteList notes={filteredNotes} />
             </section>
 
-            <HomepageAction />
+            <HomepageAction>
+                <Link className="action" to='new'>
+                    <BiSolidBookAdd />
+
+                </Link>
+            </HomepageAction>
         </>
     );
 }

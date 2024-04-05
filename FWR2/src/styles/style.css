@@ -53,7 +53,16 @@ header {
 }
 
 header h1 {
-    flex: 1 1
+    flex: 0 1
+}
+
+header .logo {
+    flex: 1 1;
+    text-decoration: none;
+}
+
+header .logo:hover {
+    text-decoration: underline;
 }
 
 header .navigation ul li {
@@ -322,6 +331,29 @@ main {
 
 .button-logout:hover {
     background-color: var(--error);
+}
+
+.back-home {
+    align-items: center;
+    background-color: initial;
+    border: 0;
+    color: var(--on-background);
+    opacity: 0.5;
+    cursor: pointer;
+    display: flex;
+    font-size: 20px;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.back-home:hover {
+    text-decoration: underline;
+}
+
+.back-home__icon {
+    align-items: center;
+    display: flex;
+    gap: 8px
 }
 
 .loading-overlay {
