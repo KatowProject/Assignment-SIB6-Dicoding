@@ -1,11 +1,16 @@
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
 import LangContext from '../contexts/LangContext';
 import AuthContext from '../contexts/AuthContext';
+
 import useInput from '../hooks/useInput';
-import { Link, useNavigate } from 'react-router-dom';
+
 import id from '../i18n/id.json';
 import gb from '../i18n/gb.json';
+
 import { getUserLogged, login, putAccessToken } from '../utils/network-data';
+import HomepageAction from '../components/actions/homePage';
 
 const t = {
     id,
@@ -17,14 +22,13 @@ function Login() {
     const { lang } = useContext(LangContext);
     const [email, onEmailChange] = useInput('');
     const [password, onPasswordChange] = useInput('');
-    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             const response = await login({ email, password });
-            if (response.error) return alert(response.message);
+            if (response.error) return;
 
             putAccessToken(response.data.accessToken);
 
@@ -33,10 +37,8 @@ function Login() {
                 setAuth(false)
             else
                 setAuth(user.data);
-
-            navigate('/');
         } catch (error) {
-            alert(t[lang].error.server);
+            console.error(error);
         }
     }
 
@@ -73,6 +75,8 @@ function Login() {
                     <Link to="/auth/register">{t[lang].login.buttonRegister}</Link>
                 </p>
             </section>
+
+            <HomepageAction />
         </>
     );
 }

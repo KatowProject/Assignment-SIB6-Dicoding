@@ -307,30 +307,38 @@ main {
 
 .button-archive {
     align-items: center;
-    background-color: initial;
     border: 0;
-    color: #fff;
     color: var(--on-background);
     cursor: pointer;
     display: flex;
-    font-size: 28px;
-    gap: 8px
+    font-size: 20px;
+    gap: 8px;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+    /* remove underline */
+    text-decoration: none;
+}
+
+.button-archive:hover {
+    color: var(--on-background-grey);
 }
 
 .button-logout {
     align-items: center;
-    background-color: initial;
-    border: 0;
-    color: #fff;
+    background-color: transparent;
+    border: none;
+    /* menghapus border */
     color: var(--on-background);
     cursor: pointer;
     display: flex;
-    font-size: 28px;
-    gap: 8px
+    font-size: 20px;
+    gap: 8px;
+    padding: 10px;
+    transition: color 0.3s ease;
 }
 
 .button-logout:hover {
-    background-color: var(--error);
+    color: var(--error);
 }
 
 .back-home {
@@ -365,7 +373,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--background);
     /* semi-transparent black */
     z-index: 9999;
     /* ensure it's on top of other elements */

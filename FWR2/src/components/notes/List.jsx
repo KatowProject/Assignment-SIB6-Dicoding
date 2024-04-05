@@ -1,8 +1,16 @@
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { showFormattedDate } from '../../utils';
 
+import LangContext from '../../contexts/LangContext';
+
+import { showFormattedDate } from '../../utils';
+import id from '../../i18n/id.json';
+import gb from '../../i18n/gb.json';
+
+const t = { id, gb };
 function NoteList({ notes }) {
+    const { lang } = useContext(LangContext);
     return (
         <>
             {notes.length > 0 ? (
@@ -13,7 +21,7 @@ function NoteList({ notes }) {
                                 <h3 className="note-item__title">{note.title}</h3>
                             </Link>
                             <p className="note-item__createdAt">
-                                <time>{showFormattedDate(note.createdAt)}</time>
+                                <time>{showFormattedDate(note.createdAt, t[lang].locale)}</time>
                             </p>
                             <p className="note-item__body">{note.body}</p>
                         </article>
@@ -22,7 +30,7 @@ function NoteList({ notes }) {
             ) : (
                 <section className="notes-list-empty">
                     <p className="notes-list__empty">
-                        Tidak ada catatan
+                            {t[lang].notes.empty}
                     </p>
                 </section>
             )}

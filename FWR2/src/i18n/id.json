@@ -1,6 +1,8 @@
 {
+    "locale": "id-ID",
     "header": {
-        "title": "Aplikasi Catatan"
+        "title": "Aplikasi Catatan",
+        "archiveButton": "Arsip"
     },
     "login": {
         "title": "Yuk, login untuk menggunakan aplikasi.",
@@ -21,7 +23,20 @@
         "buttonLogin": "Login Sekarang"
     },
     "notes": {
-        "active_title": "Catatan Aktif"
+        "active_title": "Catatan Aktif",
+        "empty": "Tidak ada catatan yang tersedia"
+    },
+    "note": {
+        "back": "Kembali ke Halaman Utama"
+    },
+    "archive": {
+        "title": "Catatan Arsip",
+        "empty": "Tidak ada catatan yang tersedia"
+    },
+    "create_note": {
+        "back": "Kembali ke Halaman Utama",
+        "title_placeholder": "Catatan Rahasia",
+        "body_placeholder": "Sebenarnya saya adalah..."
     },
     "search_bar": {
         "placeholder": "Cari catatan..."

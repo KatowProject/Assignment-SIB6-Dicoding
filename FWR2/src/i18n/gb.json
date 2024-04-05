@@ -1,6 +1,8 @@
 {
+    "locale": "en-US",
     "header": {
-        "title": "Notes App"
+        "title": "Notes App",
+        "archiveButton": "Archive"
     },
     "login": {
         "title": "Login to use app, please.",
@@ -21,7 +23,20 @@
         "buttonLogin": "Login Now"
     },
     "notes": {
-        "active_title": "Active Notes"
+        "active_title": "Active Notes",
+        "empty": "No notes available"
+    },
+    "note": {
+        "back": "Back to Home"
+    },
+    "archive": {
+        "title": "Archived Notes",
+        "empty": "No notes available"
+    },
+    "create_note": {
+        "back": "Kembali ke Halaman Utama",
+        "title_placeholder": "Secret Note",
+        "body_placeholder": "Who am i?"
     },
     "search_bar": {
         "placeholder": "Search notes..."

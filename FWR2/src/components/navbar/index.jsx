@@ -1,4 +1,4 @@
-import { BsDoorOpen, BsDoorClosed, BsArchive } from "react-icons/bs";
+import { BsDoorOpen, BsDoorClosed, BsArchive, BsBoxArrowInUp } from "react-icons/bs";
 import { useContext, useState } from "react";
 import LangContext from "../../contexts/LangContext";
 import AuthContext from "../../contexts/AuthContext";
@@ -15,6 +15,7 @@ function Navbar() {
     const { lang } = useContext(LangContext);
     const { auth } = useContext(AuthContext);
     const [isHovered, setIsHovered] = useState(false);
+    const [isArchive, setIsArchive] = useState(false);
 
     function logout() {
         localStorage.removeItem('accessToken');
@@ -29,15 +30,17 @@ function Navbar() {
 
             {auth &&
                 <>
-                    <Link to='/notes/archive' className="button-archive">
-                        <BsArchive />
-                        Archived
+                    <Link to='/notes/archive' className="button-archive"
+                        onMouseEnter={() => setIsArchive(true)}
+                        onMouseLeave={() => setIsArchive(false)}>
+                        {!isArchive ? <BsArchive className="archive-icon" /> : <BsBoxArrowInUp className="archive-icon" />}
+                        {t[lang].header.archiveButton}
                     </Link>
 
                     <button className="button-logout" onClick={logout}
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}>
-                        {isHovered ? <BsDoorClosed className="logout-icon" /> : <BsDoorOpen className="logout-icon" />}
+                        {!isHovered ? <BsDoorClosed className="logout-icon" /> : <BsDoorOpen className="logout-icon" />}
                         {auth.name}
                     </button>
 
