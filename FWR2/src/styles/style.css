@@ -53,7 +53,16 @@ header {
 }
 
 header h1 {
-    flex: 1 1
+    flex: 0 1
+}
+
+header .logo {
+    flex: 1 1;
+    text-decoration: none;
+}
+
+header .logo:hover {
+    text-decoration: underline;
 }
 
 header .navigation ul li {
@@ -298,30 +307,61 @@ main {
 
 .button-archive {
     align-items: center;
-    background-color: initial;
     border: 0;
-    color: #fff;
     color: var(--on-background);
     cursor: pointer;
     display: flex;
-    font-size: 28px;
-    gap: 8px
+    font-size: 20px;
+    gap: 8px;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+    /* remove underline */
+    text-decoration: none;
+}
+
+.button-archive:hover {
+    color: var(--on-background-grey);
 }
 
 .button-logout {
     align-items: center;
-    background-color: initial;
-    border: 0;
-    color: #fff;
+    background-color: transparent;
+    border: none;
+    /* menghapus border */
     color: var(--on-background);
     cursor: pointer;
     display: flex;
-    font-size: 28px;
-    gap: 8px
+    font-size: 20px;
+    gap: 8px;
+    padding: 10px;
+    transition: color 0.3s ease;
 }
 
 .button-logout:hover {
-    background-color: var(--error);
+    color: var(--error);
+}
+
+.back-home {
+    align-items: center;
+    background-color: initial;
+    border: 0;
+    color: var(--on-background);
+    opacity: 0.5;
+    cursor: pointer;
+    display: flex;
+    font-size: 20px;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.back-home:hover {
+    text-decoration: underline;
+}
+
+.back-home__icon {
+    align-items: center;
+    display: flex;
+    gap: 8px
 }
 
 .loading-overlay {
@@ -333,7 +373,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--background);
     /* semi-transparent black */
     z-index: 9999;
     /* ensure it's on top of other elements */

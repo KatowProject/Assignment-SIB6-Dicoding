@@ -9,14 +9,14 @@ import NoteList from "../components/notes/List";
 import HomepageAction from '../components/actions/homePage';
 
 import LangContext from '../contexts/LangContext';
-import { getActiveNotes } from "../utils/network-data";
+import { getArchivedNotes } from "../utils/network-data";
 
 import id from '../i18n/id.json';
 import gb from '../i18n/gb.json';
 
 const t = { id, gb };
 
-function NotesPage() {
+function ArchiveNotesPage() {
     const [data, setData] = useState([]);
     const [keyword, setKeyword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +29,7 @@ function NotesPage() {
     useEffect(() => {
         async function fetchData() {
             setIsLoading(true); 
-            const notes = await getActiveNotes();
+            const notes = await getArchivedNotes();
 
             if (notes.error) return alert('Error loading data');
 
@@ -49,9 +49,9 @@ function NotesPage() {
     return (
         <>
             <section className="homepage">
-                <h2>{t[lang].notes.active_title}</h2>
+                <h2>{t[lang].archive.active_title}</h2>
                 <SearchNote onSearch={handleSearch} />
-                {isLoading ? <BeatLoader /> : <NoteList notes={filteredNotes} />} 
+                {isLoading ? <BeatLoader /> : <NoteList notes={filteredNotes} />}
             </section>
 
             <HomepageAction>
@@ -63,9 +63,9 @@ function NotesPage() {
     );
 }
 
-NotesPage.propTypes = {
+ArchiveNotesPage.propTypes = {
     data: propTypes.array,
     keyword: propTypes.string,
 };
 
-export default NotesPage;
+export default ArchiveNotesPage;

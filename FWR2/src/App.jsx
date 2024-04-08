@@ -16,6 +16,9 @@ import { getUserLogged } from './utils/network-data';
 import LoadingIndicator from './components/actions/loadingIndicator';
 import NotesPage from './pages/Notes';
 import DetailNote from './pages/Detail';
+import NotFound from './pages/NotFound';
+import AddNote from './pages/AddNote';
+import ArchiveNotesPage from './pages/Archived';
 
 function App() {
   const [auth, setAuth] = useState(null);
@@ -60,15 +63,15 @@ function App() {
         <AuthContext.Provider value={authValue}>
           <div className='app-container'>
             {loading ? (
-              <LoadingIndicator loading={loading} isExiting={isExiting} />
+              <LoadingIndicator loading={loading} isExiting={isExiting} theme={theme} />
             ) : (
               <>
                 <Routes>
                   <Route path='/' element={<PrivateRoute />}>
                     <Route path='' element={<Navigate to='/notes' />} />
                     <Route path="notes" element={<NotesPage />} />
-                    <Route path='notes/archived' element={<div>Archive</div>} />
-                    <Route path='notes/new' element={<div>Trash</div>} />
+                    <Route path='notes/archive' element={<ArchiveNotesPage/>} />
+                    <Route path='notes/new' element={<AddNote />} />
                     <Route path='notes/:id' element={<DetailNote />} />
                   </Route>
 
@@ -77,7 +80,7 @@ function App() {
                     <Route path='register' element={<Register />} />
                   </Route>
 
-                  <Route path='*' element={<div>Not Found</div>} />
+                  <Route path='*' element={<NotFound />} />
                 </Routes>
               </>
             )}
