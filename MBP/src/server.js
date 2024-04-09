@@ -18,7 +18,7 @@ const init = async () => {
 
     await server.start();
 
-    console.log(`Server running on ${server.info.uri} 🚀`);
+    console.log('\x1b[33m%s\x1b[0m', `Server running on ${server.info.uri} 🚀`);
 };
 
 init();
