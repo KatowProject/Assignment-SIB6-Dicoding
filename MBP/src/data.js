@@ -11,7 +11,6 @@ const books = [];
  * @returns {[]} books
  */
 const getBooks = (query) => {
-    console.log(books);
     if (query.name) {
         return books.filter(({ name }) => name.toLowerCase().includes(query.name.toLowerCase())).map(({ id, name, publisher }) => ({ id, name, publisher }));
     } else if (query.reading) {
