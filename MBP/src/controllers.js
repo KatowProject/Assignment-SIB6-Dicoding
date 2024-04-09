@@ -1,6 +1,6 @@
 const { Request, ResponseToolkit } = require('@hapi/hapi');
 const reference = require('./reference');
-const { getBooks, getBook, addBook, updateBook } = require('./data');
+const { getBooks, getBook, addBook, updateBook, deleteBook } = require('./data');
 
 /**
  * 
@@ -142,6 +142,8 @@ const RemoveBook = (request, h) => {
             status: 'fail',
             message: 'Buku gagal dihapus. Id tidak ditemukan'
         }).code(404);
+    
+    deleteBook(bookId);
 
     return h.response({
         status: 'success',
