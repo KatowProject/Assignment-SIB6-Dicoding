@@ -38,4 +38,4 @@ const cancelVote = async (threadId, commentId) => {
     }
 }
 
-export { addComment, upVote, downVote, cancelVote };
+export default { addComment, upVote, downVote, cancelVote };

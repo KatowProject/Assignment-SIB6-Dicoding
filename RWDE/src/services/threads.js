@@ -54,4 +54,4 @@ const cancelVote = async (threadId) => {
     }
 }
 
-export { getThreads, getThread, addThread, upVote, downVote, cancelVote };
+export default { getThreads, getThread, addThread, upVote, downVote, cancelVote };

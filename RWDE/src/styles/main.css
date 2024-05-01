@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+* {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+
+}
+
+header .active {
+    font-weight: 700;
+}
+
+main {
+    padding-top: 0.5rem;
+    padding-bottom: 3rem;
+    min-height: 90vh;
+}
+
+#leaderboard .card {
+    margin-bottom: 1rem;
+
+    .icon-text {
+        font-size: 1.2rem;
+        /* adjust as needed */
+    }
+
+    .icon-text svg {
+        width: 1.2em;
+        /* adjust as needed */
+        height: 1.2em;
+        /* adjust as needed */
+    }
+}
+
+@media (min-width: 768px) {
+    main {
+        min-height: 80vh;
+    }
+}
+
+@media (min-width: 992px) {
+    main {
+        min-height: 70vh;
+    }
+}

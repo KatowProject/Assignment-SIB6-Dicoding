@@ -3,12 +3,12 @@ import { hideLoading, showLoading } from "react-redux-loading-bar";
 import AuthAPI from "../../services/auth";
 import UsersAPI from "../../services/users";
 
-const AuthActionType = {
+export const AuthActionType = {
     SET_USER: 'auth/set',
     CLEAR_USER: 'auth/clear',
 }
 
-const authAction = {
+export const authAction = {
     set: (user) => ({
         type: AuthActionType.SET_USER,
         payload: user,
@@ -59,4 +59,4 @@ const asyncLogout = () => async (dispatch) => {
     localStorage.removeItem('token');
 }
 
-export { AuthActionType, authAction, asyncLogin, asyncRegister, asyncLogout };
+export default { asyncLogin, asyncRegister, asyncLogout };
