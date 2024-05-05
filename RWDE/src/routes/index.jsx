@@ -5,6 +5,8 @@ import LeaderboardPage from '../pages/LeaderboardPage';
 import { AuthLayout } from '../components/layout/AuthLayout';
 import { LoginPage } from '../pages/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage';
+import ThreadDetail from '../pages/ThreadDetail';
+import CreateThread from '../pages/CreateTread';
 
 const routes = createBrowserRouter([
     {
@@ -20,8 +22,12 @@ const routes = createBrowserRouter([
                 element: <LeaderboardPage />
             },
             {
-                path: 'threads/:id',
-                element: <h1>Login</h1>
+                path: 'thread/new',
+                element: <CreateThread />
+            },
+            {
+                path: 'thread/:id',
+                element: <ThreadDetail />
             },
         ]
     },

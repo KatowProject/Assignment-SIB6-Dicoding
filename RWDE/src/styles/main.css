@@ -37,6 +37,46 @@ main {
     }
 }
 
+.button-tooltips {
+
+    .button-tooltip {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        margin: 0;
+    }
+
+    .button-tooltip.no-clicked {
+        cursor: default;
+    }
+}
+
+/* remove underline text in .back-link */
+.back-link {
+    text-decoration: none !important;
+    cursor: pointer;
+    color: inherit;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+/* .input-markdown make like textarea but supported markdown */
+.input-markdown {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    resize: vertical;
+    min-height: 100px;
+}
+
 @media (min-width: 768px) {
     main {
         min-height: 80vh;

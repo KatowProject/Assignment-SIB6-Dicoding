@@ -2,8 +2,12 @@ import { Form, Row, Col, Button, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import useTitle from '../hooks/useTitle';
+import useInput from '../hooks/useInput';
 
 export function LoginPage() {
+    const [email, setEmail] = useInput("");
+    const [password, setPassword] = useInput("");
+
     useTitle("Login - Open Threads");
 
     return (
@@ -19,12 +23,12 @@ export function LoginPage() {
 
                     <Form.Group className="mb-4">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" />
+                        <Form.Control type="email" value={email} onInput={setEmail} />
                     </Form.Group>
 
                     <Form.Group className="mb-4">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" />
+                        <Form.Control type="password" value={password} onInput={setPassword} />
                     </Form.Group>
 
                     <Button type="submit" className="w-100 mb-4">Sign in</Button>

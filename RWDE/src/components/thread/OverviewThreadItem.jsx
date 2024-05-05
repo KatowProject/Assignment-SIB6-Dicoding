@@ -1,8 +1,9 @@
 import { Card, Col, Badge } from 'react-bootstrap';
-import { FaUser, FaRegThumbsUp, FaRegThumbsDown, FaRegCommentAlt, FaArrowRight } from 'react-icons/fa';
+import { FaUser, FaArrowRight, FaRegCommentAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 import propTypes from 'prop-types';
+import Tooltips from '../tooltips';
 
 export default function OverviewThreadItem({ thread }) {
     return (
@@ -22,14 +23,18 @@ export default function OverviewThreadItem({ thread }) {
                 </Card.Body>
                 <Card.Footer>
                     <small className="text-muted">
-                        <span className="me-3 icon-text"><FaRegThumbsUp /> {thread.upvotes}</span>
-                        <span className="me-3 icon-text"><FaRegThumbsDown /> {thread.downvotes}</span>
-                        <span className="me-3 icon-text"><FaRegCommentAlt /> {thread.total_replies}</span>
+                        <Tooltips>
+                            <button className="button-tooltip no-clicked">
+                                <span className="icon-text"><FaRegCommentAlt /> 1</span>
+                            </button>
+
+                            <Link className="btn btn-primary btn-sm float-end" to={`/thread/${thread.id}`}>
+                                <FaArrowRight className="me-2" />
+                                Read More
+                            </Link>
+                        </Tooltips>
                     </small>
-                    <Link className="btn btn-primary btn-sm float-end" to={`/thread/${thread.id}`}>
-                        <FaArrowRight className="me-2" />
-                        Read More
-                    </Link>
+
                 </Card.Footer>
             </Card>
         </Col>

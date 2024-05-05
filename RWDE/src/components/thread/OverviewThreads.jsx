@@ -1,6 +1,7 @@
-import { Button, Card, Row } from 'react-bootstrap';
+import { Card, Row } from 'react-bootstrap';
 import { RiChatNewLine } from "react-icons/ri";
 import propTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import OverviewThreadItem from './OverviewThreadItem';
 import PartialLoading from '../loading/PartialLoading';
@@ -10,10 +11,10 @@ export default function OverviewThreads({ isLoading = true, threads }) {
         <Card>
             <Card.Header className="d-flex align-items-center justify-content-between">
                 <Card.Title className="mb-0">Threads</Card.Title>
-                <Button variant="primary" size='sm'>
+                <Link to="/thread/new" className='btn btn-sm btn-primary'>
                     <RiChatNewLine className='me-2' />
                     Create Thread
-                </Button>
+                </Link>
             </Card.Header>
             <Card.Body>
                 <Row>
