@@ -1,6 +1,6 @@
 import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 
 import useTitle from "../hooks/useTitle";
 import Category from "../components/category";
@@ -25,19 +25,26 @@ export default function HomePage() {
     const users = useSelector((state) => state.users);
     const auth = useSelector((state) => state.auth);
 
+
+    const hasRun = useRef(false);
+
     useEffect(() => {
         (
             async () => {
-                if (!threads) {
-                    await dispatch(asyncThreads.asyncGetThreads()).then(() => setIsLoading(false));
-                    console.log("threads", threads);
-                }
-                if (users && users.length === 0) {
-                    await dispatch(asyncGetUsers()).then(() => setIsLoading(false));
+                if (!hasRun.current) { // check if useEffect has run before
+                    if (!threads) {
+                        await dispatch(asyncThreads.asyncGetThreads()).then(() => setIsLoading(false));
+                        console.log("threads", threads);
+                    }
+                    if (users && users.length === 0) {
+                        await dispatch(asyncGetUsers()).then(() => setIsLoading(false));
+                    }
+                    hasRun.current = true; // mark useEffect as run
                 }
             }
         )();
     }, [dispatch, threads, users]);
+
     // const threadsOrder = useMemo(() => {
     //     if (!isLoading) {
     //         const threadList = threads;

@@ -28,7 +28,7 @@ const asyncLogin = ({ email, password }) => async (dispatch) => {
         throw response.error;
     }
 
-    localStorage.setItem('token', response.token);
+    localStorage.setItem('token', response.data.token);
 
     const user = await UsersAPI.me();
 

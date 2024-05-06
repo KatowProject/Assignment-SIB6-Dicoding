@@ -1,17 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RouterProvider } from "react-router-dom";
-
+import { useEffect, useRef } from "react";
 import routes from "./routes";
-import { useEffect } from "react";
 import { asyncPreloadMe } from "./states/preload/action";
 
 export default function App() {
     const isPreload = useSelector((state) => state.preload);
-
     const dispatch = useDispatch();
+    const hasPreloaded = useRef(false);
 
     useEffect(() => {
-        dispatch(asyncPreloadMe());
+        if (!hasPreloaded.current) {
+            dispatch(asyncPreloadMe());
+            hasPreloaded.current = true;
+        }
     }, [dispatch]);
 
     if (!isPreload) {

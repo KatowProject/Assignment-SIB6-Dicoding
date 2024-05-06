@@ -2,7 +2,7 @@ import Axios from './tools';
 
 const login = async (email, password) => {
     try {
-        const response = await Axios.post('/auth/login', { email, password });
+        const response = await Axios.post('/login', { email, password });
         return response.data;
     } catch (error) {
         return { error: error.response.data };
@@ -11,7 +11,7 @@ const login = async (email, password) => {
 
 const register = async (email, password) => {
     try {
-        const response = await Axios.post('/auth/register', { email, password });
+        const response = await Axios.post('/register', { email, password });
         return response.data;
     } catch (error) {
         return { error: error.response.data };
