@@ -3,7 +3,9 @@ import propTypes from 'prop-types';
 
 import CategoryItem from './CategoryItem';
 
-export default function Category({ categories }) {
+import PartialLoading from '../loading/PartialLoading';
+
+export default function Category({ isLoading, categories }) {
     return (
         <>
             <Card>
@@ -11,9 +13,13 @@ export default function Category({ categories }) {
                     <Card.Title>Category</Card.Title>
                 </Card.Header>
                 <Card.Body>
-                    {categories.map((category, index) => (
-                        <CategoryItem key={index} category={category} />
-                    ))}
+                    {isLoading ?
+                        <PartialLoading />
+                        :
+                        categories.map((category, index) => (
+                            <CategoryItem key={index} category={category} />
+                        ))
+                    }
                 </Card.Body>
             </Card>
         </>
@@ -21,5 +27,6 @@ export default function Category({ categories }) {
 }
 
 Category.propTypes = {
-    categories: propTypes.array.isRequired
+    categories: propTypes.array.isRequired,
+    isLoading: propTypes.bool
 }

@@ -3,6 +3,7 @@ import { Outlet, ScrollRestoration } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import LoadingBar from 'react-redux-loading-bar';
 
 export function AuthLayout() {
     const navigate = useNavigate();
@@ -15,6 +16,7 @@ export function AuthLayout() {
     }, [auth, navigate]);
     return (
         <>
+            <LoadingBar style={{ backgroundColor: '#ff0000', height: '5px' }} />
             <main className='d-flex align-items-center justify-content-center vh-100'>
                 <Container fluid>
                     <Outlet />

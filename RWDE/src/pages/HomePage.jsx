@@ -1,6 +1,6 @@
 import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useMemo, useState, useRef } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import useTitle from "../hooks/useTitle";
 import Category from "../components/category";
@@ -17,50 +17,29 @@ export default function HomePage() {
 
     const dispatch = useDispatch();
     const [searchParams] = useSearchParams();
-    const category = searchParams.get("category");
+    // const category = searchParams.get("category");
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const threads = useSelector((state) => state.threads);
+    const threads = useSelector((state) => state.threads) ?? [];
     const users = useSelector((state) => state.users);
-    const auth = useSelector((state) => state.auth);
-
-
-    const hasRun = useRef(false);
 
     useEffect(() => {
-        (
-            async () => {
-                if (!hasRun.current) { // check if useEffect has run before
-                    if (!threads) {
-                        await dispatch(asyncThreads.asyncGetThreads()).then(() => setIsLoading(false));
-                        console.log("threads", threads);
-                    }
-                    if (users && users.length === 0) {
-                        await dispatch(asyncGetUsers()).then(() => setIsLoading(false));
-                    }
-                    hasRun.current = true; // mark useEffect as run
-                }
-            }
-        )();
-    }, [dispatch, threads, users]);
+        //    getThreads();
+        dispatch(asyncGetUsers());
+        dispatch(asyncThreads.asyncGetThreads());
 
-    // const threadsOrder = useMemo(() => {
-    //     if (!isLoading) {
-    //         const threadList = threads;
+        setIsLoading(false);
 
-    //         if (category) {
-    //             return threadList.filter((thread) => thread.category === category);
-    //         }
+    }, [dispatch]);
 
-    //         return threadList.map((thread) => ({
-    //             ...thread,
-    //             owner: users.find((user) => user.id === thread.ownerId),
-    //         }))
-    //     }
-    // }, [category, isLoading, threads, users]);
-
-    const categories = ["React", "Vue", "Angular", "Svelte", "Ember"];
+    const categories = [];
+    // get categories from threads
+    threads.forEach((thread) => {
+        if (!categories.includes(thread.category)) {
+            categories.push(thread.category);
+        }
+    });
 
     return (
         <Row className="g-2">
@@ -77,7 +56,7 @@ export default function HomePage() {
             </Col>
 
             <Col md={8} id="leaderboard">
-                {/* <OverviewThreads isLoading={isLoading} threads={threads} /> */}
+                <OverviewThreads isLoading={isLoading} threads={threads} />
             </Col>
         </Row>
     )

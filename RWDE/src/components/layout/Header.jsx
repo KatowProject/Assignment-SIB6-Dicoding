@@ -3,7 +3,7 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 import { BsChatQuote } from 'react-icons/bs';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { TbLogin2 } from "react-icons/tb";
-
+import LoadingBar from 'react-redux-loading-bar';
 export default function Header() {
     return (
         <header>
@@ -35,6 +35,7 @@ export default function Header() {
                     </Nav>
                 </Container>
             </Navbar>
+            <LoadingBar style={{ backgroundColor: '#ff0000', height: '5px' }} />
         </header>
     );
 }

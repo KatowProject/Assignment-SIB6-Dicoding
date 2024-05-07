@@ -36,22 +36,17 @@ const asyncLogin = ({ email, password }) => async (dispatch) => {
     dispatch(authAction.set(user));
 }
 
-const asyncRegister = ({ email, password }) => async (dispatch) => {
+const asyncRegister = ({ name, email, password }) => async (dispatch) => {
     dispatch(showLoading());
 
-    const response = await AuthAPI.register(email, password);
+    const response = await AuthAPI.register(name, email, password);
 
     if (response.error) {
         dispatch(hideLoading());
         throw response.error;
     }
 
-    localStorage.setItem('token', response.token);
-
-    const user = await UsersAPI.me();
-
     dispatch(hideLoading());
-    dispatch(authAction.set(user));
 }
 
 const asyncLogout = () => async (dispatch) => {

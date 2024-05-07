@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import OverviewThreadItem from './OverviewThreadItem';
 import PartialLoading from '../loading/PartialLoading';
 
-export default function OverviewThreads({ isLoading = true, threads }) {
+export default function OverviewThreads({ isLoading, threads = [] }) {
     return (
         <Card>
             <Card.Header className="d-flex align-items-center justify-content-between">

@@ -18,7 +18,7 @@ export default function OverviewThreadItem({ thread }) {
                         <FaUser className="me-1" /> Posted by {thread.author}
                     </Card.Subtitle>
                     <Card.Text>
-                        {thread.description.substring(0, 500)}...
+                        {thread.body.substring(0, 500)}...
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>

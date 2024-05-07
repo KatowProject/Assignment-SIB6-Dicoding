@@ -20,8 +20,8 @@ export default function asyncGetUsers() {
     return async (dispatch) => {
         dispatch(showLoading())
         try {
-            const users = await UsersAPI.getUsers()
-            dispatch(usersActions.set(users))
+            const users = await UsersAPI.getUsers();
+            dispatch(usersActions.set(users.data))
         } catch (error) {
             dispatch(hideLoading());
         }

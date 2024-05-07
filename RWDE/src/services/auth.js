@@ -9,9 +9,9 @@ const login = async (email, password) => {
     }
 }
 
-const register = async (email, password) => {
+const register = async (name, email, password) => {
     try {
-        const response = await Axios.post('/register', { email, password });
+        const response = await Axios.post('/register', { name, email, password });
         return response.data;
     } catch (error) {
         return { error: error.response.data };

@@ -18,13 +18,15 @@ export function LoginPage() {
     async function handleSubmit(e) {
         e.preventDefault();
 
-
-        // Dispatch login action
-        await dispatch(authActions.asyncLogin({ email, password }));
-        if (localStorage.getItem('token')) {
-            navigate('/');
-        } else {
-            alert('Invalid email or password');
+        try {
+            await dispatch(authActions.asyncLogin({ email, password }));
+            if (localStorage.getItem('token')) {
+                navigate('/');
+            } else {
+                alert('Invalid email or password');
+            }
+        } catch (error) {
+            alert(error.message);
         }
     }
 
