@@ -1,9 +1,10 @@
 import { Card, Col, Badge } from 'react-bootstrap';
 import { FaUser, FaArrowRight, FaRegCommentAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-
 import propTypes from 'prop-types';
+
 import Tooltips from '../tooltips';
+import { parsingtoHTML, truncateBody } from '../../utils';
 
 export default function OverviewThreadItem({ thread }) {
     return (
@@ -15,17 +16,16 @@ export default function OverviewThreadItem({ thread }) {
                         <Badge pill bg="info" className="me-2">
                             #{thread.category}
                         </Badge>
-                        <FaUser className="me-1" /> Posted by {thread.author}
+                        <FaUser className="me-1" /> Posted by {thread.owner.name}
                     </Card.Subtitle>
-                    <Card.Text>
-                        {thread.body.substring(0, 500)}...
-                    </Card.Text>
+
+                    {parsingtoHTML(truncateBody(thread.body, 500))}
                 </Card.Body>
                 <Card.Footer>
                     <small className="text-muted">
-                        <Tooltips>
+                        <Tooltips vote={thread} type="thread" disabled={true}>
                             <button className="button-tooltip no-clicked">
-                                <span className="icon-text"><FaRegCommentAlt /> 1</span>
+                                <span className="icon-text"><FaRegCommentAlt /> {thread.totalComments}</span>
                             </button>
 
                             <Link className="btn btn-primary btn-sm float-end" to={`/thread/${thread.id}`}>

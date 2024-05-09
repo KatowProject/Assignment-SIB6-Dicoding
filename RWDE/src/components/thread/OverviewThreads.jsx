@@ -26,6 +26,7 @@ export default function OverviewThreads({ isLoading, threads = [] }) {
                             <OverviewThreadItem
                                 key={thread.id}
                                 thread={thread}
+                                onVoteUp
                             />
                         ))
                     }

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import useTitle from '../hooks/useTitle';
 import useInput from '../hooks/useInput';
 import authActions from '../states/auth/action';
+import { tokenHandler } from '../utils/tokenHandler';
 
 export function LoginPage() {
     const dispatch = useDispatch();
@@ -20,7 +21,7 @@ export function LoginPage() {
 
         try {
             await dispatch(authActions.asyncLogin({ email, password }));
-            if (localStorage.getItem('token')) {
+            if (tokenHandler.hasToken()) {
                 navigate('/');
             } else {
                 alert('Invalid email or password');

@@ -57,34 +57,33 @@ export const threadsAction = {
     }
 }
 
-function asyncCreateThreads({ title, category, body }) {
+function asyncCreateThreads(title, category, body) {
     return async (dispatch) => {
-        dispatch(showLoading())
-        const { status, message, thread } = await threadsAPI.newThreats({
-            title, category, body
+        try {
+            dispatch(showLoading());
+            const response = await threadsAPI.addThread(title, category, body);
+
+            dispatch(threadsAction.create(response.data.thread));
+        } catch (error) {
+            dispatch(hideLoading());
+            throw new Error(error);
+        } finally {
+            dispatch(hideLoading());
         }
-        )
-        if (status === 'failed') {
-            dispatch(hideLoading())
-            throw new Error(message)
-        }
-        dispatch(threadsAction.create(thread))
-        dispatch(hideLoading())
     }
 }
 
 function asyncGetThreads() {
     return async (dispatch) => {
-        dispatch(showLoading())
+        dispatch(showLoading());
         try {
             const threads = await threadsAPI.getThreads();
-            console.log(threads)
 
-            dispatch(threadsAction.set(threads.data.threads))
+            dispatch(threadsAction.set(threads.data.threads));
         } catch (error) {
-            dispatch(hideLoading())
+            dispatch(hideLoading());
         } finally {
-            dispatch(hideLoading())
+            dispatch(hideLoading());
         }
     }
 }

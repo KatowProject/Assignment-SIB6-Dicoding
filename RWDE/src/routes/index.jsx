@@ -12,14 +12,15 @@ const routes = createBrowserRouter([
     {
         path: '/',
         element: <AppLayout />,
+        errorElement: <h1>Somethings wrong</h1>,
         children: [
             {
                 index: true,
-                element: <HomePage />
+                element: <HomePage />,
             },
             {
                 path: 'leaderboard',
-                element: <LeaderboardPage />
+                element: <LeaderboardPage />,
             },
             {
                 path: 'thread/new',
@@ -28,7 +29,7 @@ const routes = createBrowserRouter([
             {
                 path: 'thread/:id',
                 element: <ThreadDetail />
-            },
+            }
         ]
     },
     {

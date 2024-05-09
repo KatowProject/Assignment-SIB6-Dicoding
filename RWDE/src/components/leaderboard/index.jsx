@@ -1,7 +1,7 @@
 import { Card, ListGroup } from 'react-bootstrap';
 import propTypes from 'prop-types';
-
-export default function Leaderboard({ title = 'Leaderboard', users }) {
+import PartialLoading from '../loading/PartialLoading';
+export default function Leaderboard({ isLoading = true, title = 'Leaderboard', leaderboards }) {
     return (
         <Card>
             <Card.Header>
@@ -9,15 +9,19 @@ export default function Leaderboard({ title = 'Leaderboard', users }) {
             </Card.Header>
             <Card.Body>
                 <ListGroup>
-                    {users.map((user, index) => (
-                        <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center">
-                            <div className="d-flex align-items-center">
-                                <img src={user.avatar} alt={user.name} className="me-2" style={{ width: '40px', borderRadius: '50%' }} />
-                                {user.name}
-                            </div>
-                            <span>{user.score}</span>
-                        </ListGroup.Item>
-                    ))}
+                    {isLoading ?
+                        <PartialLoading />
+                        :
+                        leaderboards.map((data, index) => (
+                            <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center">
+                                <div className="d-flex align-items-center">
+                                    <img src={data.user.avatar} alt={data.user.name} className="me-2" style={{ width: '40px', borderRadius: '50%' }} />
+                                    {data.user.name}
+                                </div>
+                                <span>{data.score}</span>
+                            </ListGroup.Item>
+                        ))
+                    }
                 </ListGroup>
             </Card.Body>
         </Card>
@@ -25,6 +29,7 @@ export default function Leaderboard({ title = 'Leaderboard', users }) {
 }
 
 Leaderboard.propTypes = {
-    users: propTypes.array,
-    title: propTypes.string
+    leaderboards: propTypes.array,
+    title: propTypes.string,
+    isLoading: propTypes.bool
 }

@@ -1,10 +1,11 @@
 import { ThreadActionType } from "./action"
 
-export const threadReducer = (thread = null, action = {}) => {
+export default function threadReducer(thread = [], action = {}) {
     switch (action.type) {
         case ThreadActionType.SET:
-            return action.payload.thread
+            return action.payload.thread;
         case ThreadActionType.UPVOTE:
+            console.log('thread', thread);
             return {
                 ...thread,
                 upVotesBy: [...thread.upVotesBy, action.payload.userId],

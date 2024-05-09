@@ -1,19 +1,31 @@
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import useInput from "../hooks/useInput";
-
+import asyncThread from '../states/threads/action';
 
 export default function CreateThread() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [title, onTitleChange] = useInput('');
     const [category, onCategoryChange] = useInput('');
     const [content, onContentChange] = useInput('');
 
-    function onSubmit(e) {
+    async function onSubmit(e) {
         e.preventDefault();
 
-        // create thread
+        try {
+            dispatch(asyncThread.asyncCreateThreads(title, category, content));
+
+            alert('Thread created successfully');
+            navigate('/');
+        } catch (error) {
+            alert(error.message);
+        }
     }
     return (
         <Row className="justify-content-center">
@@ -33,12 +45,12 @@ export default function CreateThread() {
                         <Form onSubmit={onSubmit}>
                             <Form.Group className="mb-3">
                                 <Form.Label>Title</Form.Label>
-                                <Form.Control type="text" value={title} onChange={onTitleChange} />
+                                <Form.Control type="text" value={title} onInput={onTitleChange} />
                             </Form.Group>
 
                             <Form.Group className="mb-3">
                                 <Form.Label>Category</Form.Label>
-                                <Form.Control type="text" value={category} onChange={onCategoryChange} />
+                                <Form.Control type="text" value={category} onInput={onCategoryChange} />
                             </Form.Group>
 
                             <Form.Group className="mb-3">
@@ -47,9 +59,9 @@ export default function CreateThread() {
                                     className="form-control input-markdown"
                                     contentEditable
                                     data-placeholder="Write your description here..."
-                                    onInput={(e) => onContentChange(e.target.innerHTML)}
+                                    onInput={onContentChange}
+                                    suppressContentEditableWarning={true}
                                 >
-                                    {content || ''}
                                 </div>
                             </Form.Group>
 

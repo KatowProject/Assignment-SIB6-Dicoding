@@ -32,8 +32,8 @@ const asyncLogin = ({ email, password }) => async (dispatch) => {
 
     const user = await UsersAPI.me();
 
+    dispatch(authAction.set(user.data.user));
     dispatch(hideLoading());
-    dispatch(authAction.set(user));
 }
 
 const asyncRegister = ({ name, email, password }) => async (dispatch) => {

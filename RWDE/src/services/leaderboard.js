@@ -9,4 +9,4 @@ const getLeaderboard = async () => {
     }
 }
 
-export { getLeaderboard };
+export default { getLeaderboard };

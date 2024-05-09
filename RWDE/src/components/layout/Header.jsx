@@ -1,10 +1,19 @@
-import { NavLink } from 'react-router-dom';
-import { Navbar, Container, Nav } from 'react-bootstrap';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { BsChatQuote } from 'react-icons/bs';
 import { MdOutlineLeaderboard } from 'react-icons/md';
-import { TbLogin2 } from "react-icons/tb";
+import { TbLogout2 } from "react-icons/tb";
 import LoadingBar from 'react-redux-loading-bar';
+
 export default function Header() {
+    const navigate = useNavigate();
+
+    function handleLogout() {
+        localStorage.removeItem('token');
+
+        navigate('/login');
+    }
+
     return (
         <header>
             <Navbar className="bg-body-tertiary">
@@ -28,10 +37,10 @@ export default function Header() {
                             <MdOutlineLeaderboard className='me-2' />
                             Leaderboard
                         </NavLink>
-                        <NavLink to="/login" className="nav-link">
-                            <TbLogin2 className='me-2' />
-                            Login
-                        </NavLink>
+                        <Button className="nav-link" onClick={handleLogout}>
+                            <TbLogout2 className='me-2' />
+                            Logout
+                        </Button>
                     </Nav>
                 </Container>
             </Navbar>

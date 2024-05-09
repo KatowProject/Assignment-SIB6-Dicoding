@@ -49,6 +49,12 @@ main {
     .button-tooltip.no-clicked {
         cursor: default;
     }
+
+    .profile-icon {
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+    }
 }
 
 /* remove underline text in .back-link */

@@ -16,12 +16,13 @@ export const usersActions = {
     },
 }
 
-export default function asyncGetUsers() {
+function asyncGetUsers() {
     return async (dispatch) => {
-        dispatch(showLoading())
+        dispatch(showLoading());
         try {
             const users = await UsersAPI.getUsers();
-            dispatch(usersActions.set(users.data))
+
+            dispatch(usersActions.set(users.data.users));
         } catch (error) {
             dispatch(hideLoading());
         }
@@ -29,4 +30,8 @@ export default function asyncGetUsers() {
             dispatch(hideLoading());
         }
     }
+}
+
+export default {
+    asyncGetUsers
 }

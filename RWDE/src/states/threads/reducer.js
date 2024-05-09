@@ -1,6 +1,6 @@
 import { ThreadsActionType } from "./action"
 
-export default function threadsReducer(threads = null, action = {}) {
+export default function threadsReducer(threads = [], action = {}) {
     switch (action.type) {
         case ThreadsActionType.CREATE:
             return [action.payload.thread, ...threads]

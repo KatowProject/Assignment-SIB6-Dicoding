@@ -9,5 +9,9 @@ export const tokenHandler = {
 
     removeToken: () => {
         localStorage.removeItem('token');
+    },
+
+    hasToken: () => {
+        return localStorage.getItem('token') !== null;
     }
 }
