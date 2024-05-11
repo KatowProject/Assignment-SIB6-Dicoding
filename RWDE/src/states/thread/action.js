@@ -89,9 +89,8 @@ export const threadAction = {
 
 function asyncGetThread(threadId) {
     return async (dispatch) => {
-        dispatch(showLoading());
-
         try {
+            dispatch(showLoading());
             const response = await ThreadServices.getThread(threadId);
 
             dispatch(threadAction.setThread(response.data.detailThread));
@@ -106,114 +105,164 @@ function asyncGetThread(threadId) {
 
 function asyncUpvoteThread(threadId) {
     return async (dispatch, getState) => {
-        dispatch(showLoading());
-        const { auth } = getState();
+        try {
+            dispatch(showLoading());
 
-        const response = await ThreadServices.upVote(threadId);
+            const { auth } = getState();
 
-        if (response.error) {
+            const response = await ThreadServices.upVote(threadId);
+
+            if (response.error) {
+                dispatch(hideLoading());
+                throw new Error(response.error);
+            }
+
+            dispatch(threadAction.upvoteThread(auth.id, threadId));
+        } catch (error) {
             dispatch(hideLoading());
-            throw new Error(response.error);
+            throw new Error(error);
+        } finally {
+            dispatch(hideLoading());
         }
-
-        dispatch(threadAction.upvoteThread(auth.id, threadId));
     }
 }
 
 function asyncDownvoteThread(threadId) {
     return async (dispatch, getState) => {
-        dispatch(showLoading());
-        const { auth } = getState();
+        try {
+            dispatch(showLoading());
 
-        const response = await ThreadServices.downVote(threadId);
+            const { auth } = getState();
 
-        if (response.error) {
+            const response = await ThreadServices.downVote(threadId);
+
+            if (response.error) {
+                dispatch(hideLoading());
+                throw new Error(response.error);
+            }
+
+            dispatch(threadAction.downvoteThread(auth.id, threadId));
+        } catch (error) {
             dispatch(hideLoading());
-            throw new Error(response.error);
+            throw new Error(error);
+        } finally {
+            dispatch(hideLoading());
         }
-
-        dispatch(threadAction.downvoteThread(auth.id, threadId));
     }
 }
 
 function asyncCancelVoteThread(threadId) {
     return async (dispatch, getState) => {
-        dispatch(showLoading());
-        const { auth } = getState();
+        try {
+            dispatch(showLoading());
+            const { auth } = getState();
 
-        const response = await ThreadServices.cancelVote(threadId);
+            const response = await ThreadServices.cancelVote(threadId);
 
-        if (response.error) {
+            if (response.error) {
+                dispatch(hideLoading());
+                throw new Error(response.error);
+            }
+
+            dispatch(threadAction.cancelVoteThread(auth.id, threadId));
+        } catch (error) {
             dispatch(hideLoading());
-            throw new Error(response.error);
+            throw new Error(error);
+        } finally {
+            dispatch(hideLoading());
         }
-
-        dispatch(threadAction.cancelVoteThread(auth.id, threadId));
     }
 }
 
 function asyncAddComment(threadId, comment) {
     return async (dispatch) => {
-        dispatch(showLoading());
+        try {
+            dispatch(showLoading());
 
-        const response = await CommentServices.addComment(threadId, comment);
+            const response = await CommentServices.addComment(threadId, comment);
 
-        if (response.error) {
+            if (response.error) {
+                dispatch(hideLoading());
+                throw new Error(response.error);
+            }
+
+            dispatch(threadAction.addComment(response.data.comment));
+        } catch (error) {
             dispatch(hideLoading());
-            throw new Error(response.error);
+            throw new Error(error);
+        } finally {
+            dispatch(hideLoading());
         }
 
-        dispatch(threadAction.addComment(response));
-
-        dispatch(hideLoading());
     }
 }
 
 function asyncUpvoteComment(threadId, commentId) {
     return async (dispatch, getState) => {
-        dispatch(showLoading());
-        const { auth } = getState();
+        try {
+            dispatch(showLoading());
+            const { auth } = getState();
 
-        const response = await CommentServices.upVote(threadId, commentId);
+            const response = await CommentServices.upVote(threadId, commentId);
 
-        if (response.error) {
+            if (response.error) {
+                dispatch(hideLoading());
+                throw new Error(response.error);
+            }
+
+            dispatch(threadAction.upvoteComment(auth.id, commentId));
+        } catch (error) {
             dispatch(hideLoading());
-            throw new Error(response.error);
+            throw new Error(error);
+        } finally {
+            dispatch(hideLoading());
         }
-
-        dispatch(threadAction.upvoteComment(auth.id, commentId));
     }
 }
 
 function asyncDownvoteComment(threadId, commentId) {
     return async (dispatch, getState) => {
-        dispatch(showLoading());
-        const { auth } = getState();
+        try {
+            dispatch(showLoading());
+            const { auth } = getState();
 
-        const response = await CommentServices.downVote(threadId, commentId);
+            const response = await CommentServices.downVote(threadId, commentId);
 
-        if (response.error) {
+            if (response.error) {
+                dispatch(hideLoading());
+                throw new Error(response.error);
+            }
+
+            dispatch(threadAction.downvoteComment(auth.id, commentId));
+        } catch (error) {
             dispatch(hideLoading());
-            throw new Error(response.error);
+            throw new Error(error);
+        } finally {
+            dispatch(hideLoading());
         }
-
-        dispatch(threadAction.downvoteComment(auth.id, commentId));
     }
 }
 
 function asyncCancelVoteComment(threadId, commentId) {
     return async (dispatch, getState) => {
-        dispatch(showLoading());
-        const { auth } = getState();
+        try {
+            dispatch(showLoading());
+            const { auth } = getState();
 
-        const response = await CommentServices.cancelVote(threadId, commentId);
+            const response = await CommentServices.cancelVote(threadId, commentId);
 
-        if (response.error) {
+            if (response.error) {
+                dispatch(hideLoading());
+                throw new Error(response.error);
+            }
+
+            dispatch(threadAction.cancelVoteComment(auth.id, commentId));
+        } catch (error) {
             dispatch(hideLoading());
-            throw new Error(response.error);
+            throw new Error(error);
+        } finally {
+            dispatch(hideLoading());
         }
-
-        dispatch(threadAction.cancelVoteComment(auth.id, commentId));
     }
 }
 

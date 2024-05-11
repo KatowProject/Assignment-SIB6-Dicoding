@@ -7,7 +7,7 @@ import CommentList from './CommentList';
 import asyncThread from '../../states/thread/action';
 import { useDispatch } from 'react-redux';
 
-export default function Comments({ thread, auth, onSubmit }) {
+export default function Comments({ thread, auth }) {
     const dispatch = useDispatch();
 
     async function onCommentSubmit(comment) {
@@ -22,9 +22,13 @@ export default function Comments({ thread, auth, onSubmit }) {
                 <Card.Body>
                     <Card.Title className="mb-3">Comments</Card.Title>
 
-                    {thread.comments.map((comment, index) => (
-                        <CommentList key={index} comment={comment} />
-                    ))}
+                    {
+                        thread.comments.map((comment, index) => {
+                            return (
+                                <CommentList key={index} comment={comment} />
+                            )
+                        })
+                    }
 
                 </Card.Body>
             </Card>

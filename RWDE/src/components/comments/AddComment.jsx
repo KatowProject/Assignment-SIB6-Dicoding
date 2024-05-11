@@ -8,8 +8,12 @@ export default function AddComment({ auth, onSubmit }) {
     function handleSubmit(e) {
         e.preventDefault();
 
+        if (!content) return;
         onSubmit(content);
         reset();
+
+        // set content to empty
+        document.querySelector('.input-markdown').textContent = '';
     }
 
     return (

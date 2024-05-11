@@ -5,10 +5,12 @@ export default function threadReducer(thread = [], action = {}) {
         case ThreadActionType.SET:
             return action.payload.thread;
         case ThreadActionType.UPVOTE:
-            console.log('thread', thread);
             return {
                 ...thread,
                 upVotesBy: [...thread.upVotesBy, action.payload.userId],
+                downVotesBy: thread.downVotesBy.filter(
+                    (vote) => vote !== action.payload.userId,
+                ),
             }
         case ThreadActionType.CANCELVOTE:
             return {
@@ -24,6 +26,9 @@ export default function threadReducer(thread = [], action = {}) {
             return {
                 ...thread,
                 downVotesBy: [...thread.downVotesBy, action.payload.userId],
+                upVotesBy: thread.upVotesBy.filter(
+                    (vote) => vote !== action.payload.userId,
+                ),
             }
         case ThreadActionType.ADD_COMMENT:
             return {
@@ -31,12 +36,13 @@ export default function threadReducer(thread = [], action = {}) {
                 comments: [action.payload.comment, ...thread.comments],
             }
         case ThreadActionType.UPVOTE_COMMENT: {
-            const updatedComments = thread.comments.slice()
+            const updatedComments = thread.comments.slice();
             const index = updatedComments.findIndex(comment => comment.id === action.payload.commentId)
             if (index !== -1) {
                 updatedComments[index] = {
                     ...updatedComments[index],
-                    upVotesBy: [action.payload.userId, ...updatedComments[index].upVotesBy]
+                    upVotesBy: [action.payload.userId, ...updatedComments[index].upVotesBy],
+                    downVotesBy: updatedComments[index].downVotesBy.filter(userId => userId !== action.payload.userId)
                 }
             }
             return {
@@ -67,7 +73,8 @@ export default function threadReducer(thread = [], action = {}) {
             if (index !== -1) {
                 updatedComments[index] = {
                     ...updatedComments[index],
-                    downVotesBy: [action.payload.userId, ...updatedComments[index].downVotesBy]
+                    downVotesBy: [action.payload.userId, ...updatedComments[index].downVotesBy],
+                    upVotesBy: updatedComments[index].upVotesBy.filter(userId => userId !== action.payload.userId)
                 }
             }
             return {

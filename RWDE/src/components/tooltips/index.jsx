@@ -1,32 +1,57 @@
-import { FaRegThumbsUp, FaRegThumbsDown, FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
 import propTypes from 'prop-types';
+import { FaRegThumbsUp, FaRegThumbsDown, FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import asyncThread from '../../states/thread/action';
 
 export default function Tooltips({ vote, children, type, disabled = false }) {
     const dispatch = useDispatch();
+    const { id } = useParams();
+
     const auth = useSelector((state) => state.auth);
 
     function handleVoteUp() {
         if (disabled) return;
-        if (type === 'thread') {
-            dispatch(asyncThread.asyncUpvoteThread(vote.id))
-                .then(() => console.log('upvoted'));
+
+        switch (type) {
+            case 'thread':
+                vote.upVotesBy.includes(auth.id) ?
+                    dispatch(asyncThread.asyncCancelVoteThread(vote.id))
+                    :
+                    dispatch(asyncThread.asyncUpvoteThread(vote.id));
+
+                break;
+            case 'comment':
+                vote.upVotesBy.includes(auth.id) ?
+                    dispatch(asyncThread.asyncCancelVoteComment(id, vote.id))
+                    :
+                    dispatch(asyncThread.asyncUpvoteComment(id, vote.id));
+
+                break;
+            default:
         }
     }
 
     function handleVoteDown() {
         if (disabled) return;
 
-        if (type === 'thread') {
-            dispatch(asyncThread.asyncDownvoteThread(vote.id))
+        switch (type) {
+            case 'thread':
+                vote.downVotesBy.includes(auth.id) ?
+                    dispatch(asyncThread.asyncCancelVoteThread(vote.id))
+                    :
+                    dispatch(asyncThread.asyncDownvoteThread(vote.id));
+
+                break;
+            case 'comment':
+                vote.downVotesBy.includes(auth.id) ?
+                    dispatch(asyncThread.asyncCancelVoteComment(id, vote.id))
+                    :
+                    dispatch(asyncThread.asyncDownvoteComment(id, vote.id));
+                break;
+            default:
         }
-        // if (type === 'thread') {
-        //     dispatch(asyncVoteThread(vote._id, 'down'));
-        // } else {
-        //     dispatch(asyncVoteComment(vote._id, 'down'));
-        // }
     }
 
     return (
