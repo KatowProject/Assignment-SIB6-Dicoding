@@ -20,8 +20,13 @@ const getUser = async (userId) => {
 }
 
 const me = async () => {
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${tokenHandler.getToken()}`
+    }
+
     try {
-        const response = await Axios.get('users/me', { headers: { Authorization: `Bearer ${tokenHandler.getToken()}` } });
+        const response = await Axios.get('users/me', { headers });
         return response.data;
     } catch (error) {
         return { error: error.response.data };

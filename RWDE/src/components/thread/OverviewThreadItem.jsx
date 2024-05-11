@@ -1,10 +1,10 @@
 import { Card, Col, Badge } from 'react-bootstrap';
-import { FaUser, FaArrowRight, FaRegCommentAlt } from 'react-icons/fa';
+import { FaUser, FaArrowRight, FaRegCommentAlt, FaRegClock } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 
 import Tooltips from '../tooltips';
-import { parsingtoHTML, truncateBody } from '../../utils';
+import { parsingtoHTML, truncateBody, showFormattedDate } from '../../utils';
 
 export default function OverviewThreadItem({ thread }) {
     return (
@@ -26,6 +26,13 @@ export default function OverviewThreadItem({ thread }) {
                         <Tooltips vote={thread} type="thread" disabled={true}>
                             <button className="button-tooltip no-clicked">
                                 <span className="icon-text"><FaRegCommentAlt /> {thread.totalComments}</span>
+                            </button>
+
+                            <button className="button-tooltip no-clicked">
+                                {/* date */}
+                                <span className="icon-text">
+                                    <FaRegClock className='me-2' />
+                                    {showFormattedDate(thread.createdAt)}</span>
                             </button>
 
                             <Link className="btn btn-primary btn-sm float-end" to={`/thread/${thread.id}`}>

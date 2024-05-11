@@ -1,4 +1,5 @@
 import Axios from './tools';
+import { tokenHandler } from '../utils/tokenHandler';
 
 const getThreads = async () => {
     try {
@@ -19,8 +20,13 @@ const getThread = async (threadId) => {
 }
 
 const addThread = async (title, category = "", body) => {
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${tokenHandler.getToken()}`,
+    }
+
     try {
-        const response = await Axios.post('threads', { title, category, body });
+        const response = await Axios.post('threads', { title, category, body }, { headers });
         return response.data;
     } catch (error) {
         return { error: error.response.data };
@@ -28,8 +34,13 @@ const addThread = async (title, category = "", body) => {
 }
 
 const upVote = async (threadId) => {
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${tokenHandler.getToken()}`,
+    }
+
     try {
-        const response = await Axios.post(`threads/${threadId}/up-vote`);
+        const response = await Axios.post(`threads/${threadId}/up-vote`, {}, { headers });
         return response.data;
     } catch (error) {
         return { error: error.response.data };
@@ -37,8 +48,13 @@ const upVote = async (threadId) => {
 }
 
 const downVote = async (threadId) => {
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${tokenHandler.getToken()}`,
+    }
+
     try {
-        const response = await Axios.post(`threads/${threadId}/down-vote`);
+        const response = await Axios.post(`threads/${threadId}/down-vote`, {}, { headers });
         return response.data;
     } catch (error) {
         return { error: error.response.data };
@@ -46,8 +62,13 @@ const downVote = async (threadId) => {
 }
 
 const cancelVote = async (threadId) => {
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${tokenHandler.getToken()}`,
+    }
+
     try {
-        const response = await Axios.post(`threads/${threadId}/neutral-vote`);
+        const response = await Axios.post(`threads/${threadId}/neutral-vote`, {}, { headers });
         return response.data;
     } catch (error) {
         return { error: error.response.data };
