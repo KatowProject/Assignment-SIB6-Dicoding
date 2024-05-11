@@ -2,6 +2,8 @@ import { hideLoading, showLoading } from "react-redux-loading-bar";
 
 import AuthAPI from "../../services/auth";
 import UsersAPI from "../../services/users";
+import { tokenHandler } from "../../utils/tokenHandler";
+import axios from "../../services/tools";
 
 export const AuthActionType = {
     SET_USER: 'auth/set',
@@ -19,21 +21,22 @@ export const authAction = {
 }
 
 const asyncLogin = ({ email, password }) => async (dispatch) => {
-    dispatch(showLoading());
+    try {
+        dispatch(showLoading());
 
-    const response = await AuthAPI.login(email, password);
+        const response = await AuthAPI.login(email, password);
 
-    if (response.error) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+        tokenHandler.setToken(response.data.token);
+
+        const user = await UsersAPI.me();
+        dispatch(authAction.set(user.data.user));
+    } catch (error) {
         dispatch(hideLoading());
-        throw response.error;
+        throw error;
+    } finally {
+        dispatch(hideLoading());
     }
-
-    localStorage.setItem('token', response.data.token);
-
-    const user = await UsersAPI.me();
-
-    dispatch(authAction.set(user.data.user));
-    dispatch(hideLoading());
 }
 
 const asyncRegister = ({ name, email, password }) => async (dispatch) => {

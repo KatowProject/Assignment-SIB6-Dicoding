@@ -1,17 +1,23 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import { Navbar, Container, Nav } from 'react-bootstrap';
 import { BsChatQuote } from 'react-icons/bs';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { TbLogout2 } from "react-icons/tb";
 import LoadingBar from 'react-redux-loading-bar';
+import asyncAuth from '../../states/auth/action';
+import { tokenHandler } from '../../utils/tokenHandler';
+import { useDispatch } from 'react-redux';
 
 export default function Header() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     function handleLogout() {
-        localStorage.removeItem('token');
+        dispatch(asyncAuth.asyncLogout());
 
-        navigate('/login');
+        tokenHandler.removeToken();
+
+        navigate('/login', { replace: true });
     }
 
     return (
@@ -37,10 +43,10 @@ export default function Header() {
                             <MdOutlineLeaderboard className='me-2' />
                             Leaderboard
                         </NavLink>
-                        <Button className="nav-link" onClick={handleLogout}>
+                        <button className="nav-link" onClick={handleLogout}>
                             <TbLogout2 className='me-2' />
                             Logout
-                        </Button>
+                        </button>
                     </Nav>
                 </Container>
             </Navbar>

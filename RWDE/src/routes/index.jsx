@@ -7,12 +7,14 @@ import { LoginPage } from '../pages/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage';
 import ThreadDetail from '../pages/ThreadDetail';
 import CreateThread from '../pages/CreateTread';
+import Error500 from '../pages/500';
+import Error404 from '../pages/404';
 
 const routes = createBrowserRouter([
     {
         path: '/',
         element: <AppLayout />,
-        errorElement: <h1>Somethings wrong</h1>,
+        errorElement: <Error500 />,
         children: [
             {
                 index: true,
@@ -45,6 +47,11 @@ const routes = createBrowserRouter([
                 element: <RegisterPage />
             }
         ]
+    },
+    // not found
+    {
+        path: '*',
+        element: <Error404 />
     }
 ]);
 

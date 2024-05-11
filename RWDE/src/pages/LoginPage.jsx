@@ -27,6 +27,7 @@ export function LoginPage() {
                 alert('Invalid email or password');
             }
         } catch (error) {
+            console.error(error);
             alert(error.message);
         }
     }

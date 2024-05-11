@@ -1,11 +1,11 @@
 import { Card } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 
 import propTypes from 'prop-types';
 import AddComment from './AddComment';
 import CommentList from './CommentList';
 
 import asyncThread from '../../states/thread/action';
-import { useDispatch } from 'react-redux';
 
 export default function Comments({ thread, auth }) {
     const dispatch = useDispatch();

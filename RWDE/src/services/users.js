@@ -1,3 +1,4 @@
+import { tokenHandler } from '../utils/tokenHandler';
 import Axios from './tools';
 
 const getUsers = async () => {
@@ -20,7 +21,7 @@ const getUser = async (userId) => {
 
 const me = async () => {
     try {
-        const response = await Axios.get('users/me');
+        const response = await Axios.get('users/me', { headers: { Authorization: `Bearer ${tokenHandler.getToken()}` } });
         return response.data;
     } catch (error) {
         return { error: error.response.data };

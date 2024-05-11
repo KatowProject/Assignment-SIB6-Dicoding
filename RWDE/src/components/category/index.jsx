@@ -47,5 +47,5 @@ export default function Category({ isLoading, categories }) {
 
 Category.propTypes = {
     categories: propTypes.array.isRequired,
-    isLoading: propTypes.bool,
+    isLoading: propTypes.bool
 }
