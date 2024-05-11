@@ -1,20 +1,21 @@
-import { Card } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import React from 'react'
+import { Card } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
 
-import propTypes from 'prop-types';
-import AddComment from './AddComment';
-import CommentList from './CommentList';
+import propTypes from 'prop-types'
+import AddComment from './AddComment'
+import CommentList from './CommentList'
 
-import asyncThread from '../../states/thread/action';
+import asyncThread from '../../states/thread/action'
 
-export default function Comments({ thread, auth }) {
-    const dispatch = useDispatch();
+export default function Comments ({ thread, auth }) {
+  const dispatch = useDispatch()
 
-    async function onCommentSubmit(comment) {
-        dispatch(asyncThread.asyncAddComment(thread.id, comment));
-    }
+  async function onCommentSubmit (comment) {
+    dispatch(asyncThread.asyncAddComment(thread.id, comment))
+  }
 
-    return (
+  return (
         <>
             <AddComment auth={auth} onSubmit={onCommentSubmit} />
 
@@ -24,9 +25,9 @@ export default function Comments({ thread, auth }) {
 
                     {
                         thread.comments.map((comment, index) => {
-                            return (
+                          return (
                                 <CommentList key={index} comment={comment} />
-                            )
+                          )
                         })
                     }
 
@@ -34,10 +35,10 @@ export default function Comments({ thread, auth }) {
             </Card>
 
         </>
-    );
+  )
 }
 
 Comments.propTypes = {
-    thread: propTypes.object.isRequired,
-    auth: propTypes.object.isRequired
+  thread: propTypes.object.isRequired,
+  auth: propTypes.object.isRequired
 }

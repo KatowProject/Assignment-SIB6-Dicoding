@@ -1,29 +1,29 @@
-import { Col, Row } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { Col, Row } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
 
-import asyncLeaderboard from "../states/leaderboard/action";
-import Leaderboard from '../components/leaderboard';
-import useTitle from '../hooks/useTitle';
+import asyncLeaderboard from '../states/leaderboard/action'
+import Leaderboard from '../components/leaderboard'
+import useTitle from '../hooks/useTitle'
 
-export default function LeaderboardPage() {
-    useTitle("Leaderboard - Open Threads");
+export default function LeaderboardPage () {
+  useTitle('Leaderboard - Open Threads')
 
-    const dispatch = useDispatch();
-    const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch()
+  const [isLoading, setIsLoading] = useState(true)
 
-    const leaderboards = useSelector((state) => state.leaderboard);
+  const leaderboards = useSelector((state) => state.leaderboard)
 
-    useEffect(() => {
-        const fetchData = async () => {
-            await dispatch(asyncLeaderboard.asyncSetLeaderboard());
-            setIsLoading(false);
-        };
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(asyncLeaderboard.asyncSetLeaderboard())
+      setIsLoading(false)
+    }
 
-        fetchData();
-    }, [dispatch]);
+    fetchData()
+  }, [dispatch])
 
-    return (
+  return (
         <Row className='justify-content-center'>
             <Col md={8}>
                 <Row>
@@ -33,5 +33,5 @@ export default function LeaderboardPage() {
                 </Row>
             </Col>
         </Row>
-    )
+  )
 }

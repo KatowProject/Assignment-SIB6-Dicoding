@@ -1,13 +1,14 @@
-import { Card, Col, Badge } from 'react-bootstrap';
-import { FaUser, FaArrowRight, FaRegCommentAlt, FaRegClock } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import propTypes from 'prop-types';
+import React from 'react'
+import { Card, Col, Badge } from 'react-bootstrap'
+import { FaUser, FaArrowRight, FaRegCommentAlt, FaRegClock } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import propTypes from 'prop-types'
 
-import Tooltips from '../tooltips';
-import { parsingtoHTML, truncateBody, showFormattedDate } from '../../utils';
+import Tooltips from '../tooltips'
+import { parsingtoHTML, truncateBody, showFormattedDate } from '../../utils'
 
-export default function OverviewThreadItem({ thread }) {
-    return (
+export default function OverviewThreadItem ({ thread }) {
+  return (
         <Col xl={12} className="mb-3">
             <Card className="h-100">
                 <Card.Body>
@@ -45,9 +46,9 @@ export default function OverviewThreadItem({ thread }) {
                 </Card.Footer>
             </Card>
         </Col>
-    )
+  )
 }
 
 OverviewThreadItem.propTypes = {
-    thread: propTypes.object.isRequired
+  thread: propTypes.object.isRequired
 }

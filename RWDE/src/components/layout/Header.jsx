@@ -1,26 +1,30 @@
-import { NavLink, useNavigate } from 'react-router-dom';
-import { Navbar, Container, Nav } from 'react-bootstrap';
-import { BsChatQuote } from 'react-icons/bs';
-import { MdOutlineLeaderboard } from 'react-icons/md';
-import { TbLogout2 } from "react-icons/tb";
-import LoadingBar from 'react-redux-loading-bar';
-import asyncAuth from '../../states/auth/action';
-import { tokenHandler } from '../../utils/tokenHandler';
-import { useDispatch } from 'react-redux';
+import React from 'react'
 
-export default function Header() {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+import { NavLink, useNavigate } from 'react-router-dom'
+import { Navbar, Container, Nav } from 'react-bootstrap'
+import LoadingBar from 'react-redux-loading-bar'
 
-    function handleLogout() {
-        dispatch(asyncAuth.asyncLogout());
+import { BsChatQuote } from 'react-icons/bs'
+import { MdOutlineLeaderboard } from 'react-icons/md'
+import { useDispatch } from 'react-redux'
+import { TbLogout2 } from 'react-icons/tb'
 
-        tokenHandler.removeToken();
+import asyncAuth from '../../states/auth/action'
+import { tokenHandler } from '../../utils/tokenHandler'
 
-        navigate('/login', { replace: true });
-    }
+export default function Header () {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-    return (
+  function handleLogout () {
+    dispatch(asyncAuth.asyncLogout())
+
+    tokenHandler.removeToken()
+
+    navigate('/login', { replace: true })
+  }
+
+  return (
         <header>
             <Navbar className="bg-body-tertiary">
                 <Container>
@@ -52,5 +56,5 @@ export default function Header() {
             </Navbar>
             <LoadingBar style={{ backgroundColor: '#ff0000', height: '5px' }} />
         </header>
-    );
+  )
 }

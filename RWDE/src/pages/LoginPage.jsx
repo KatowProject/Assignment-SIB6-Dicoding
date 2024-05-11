@@ -1,39 +1,39 @@
-import { Form, Row, Col, Button, Image } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import React from 'react'
+import { Form, Row, Col, Button, Image } from 'react-bootstrap'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
-import useTitle from '../hooks/useTitle';
-import useInput from '../hooks/useInput';
-import authActions from '../states/auth/action';
-import { tokenHandler } from '../utils/tokenHandler';
+import useTitle from '../hooks/useTitle'
+import useInput from '../hooks/useInput'
+import authActions from '../states/auth/action'
+import { tokenHandler } from '../utils/tokenHandler'
 
-export function LoginPage() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+export function LoginPage () {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-    useTitle("Login - Open Threads");
+  useTitle('Login - Open Threads')
 
-    const [email, setEmail] = useInput("");
-    const [password, setPassword] = useInput("");
+  const [email, setEmail] = useInput('')
+  const [password, setPassword] = useInput('')
 
-    async function handleSubmit(e) {
-        e.preventDefault();
+  async function handleSubmit (e) {
+    e.preventDefault()
 
-        try {
-            await dispatch(authActions.asyncLogin({ email, password }));
-            if (tokenHandler.hasToken()) {
-                navigate('/');
-            } else {
-                alert('Invalid email or password');
-            }
-        } catch (error) {
-            console.error(error);
-            alert(error.message);
-        }
+    try {
+      await dispatch(authActions.asyncLogin({ email, password }))
+      if (tokenHandler.hasToken()) {
+        navigate('/')
+      } else {
+        alert('Invalid email or password')
+      }
+    } catch (error) {
+      console.error(error)
+      alert(error.message)
     }
+  }
 
-
-    return (
+  return (
         <Row className="justify-content-center">
             <Col md={4}>
                 <div className="d-flex align-items-center justify-content-center mb-4">
@@ -66,5 +66,5 @@ export function LoginPage() {
                 </div>
             </Col>
         </Row>
-    );
+  )
 }

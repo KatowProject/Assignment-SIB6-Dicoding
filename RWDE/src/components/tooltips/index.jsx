@@ -1,60 +1,58 @@
-import propTypes from 'prop-types';
-import { FaRegThumbsUp, FaRegThumbsDown, FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import React from 'react'
 
-import asyncThread from '../../states/thread/action';
+import propTypes from 'prop-types'
+import { FaRegThumbsUp, FaRegThumbsDown, FaThumbsDown, FaThumbsUp } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
-export default function Tooltips({ vote, children, type, disabled = false }) {
-    const dispatch = useDispatch();
-    const { id } = useParams();
+import asyncThread from '../../states/thread/action'
 
-    const auth = useSelector((state) => state.auth);
+export default function Tooltips ({ vote, children, type, disabled = false }) {
+  const dispatch = useDispatch()
+  const { id } = useParams()
 
-    function handleVoteUp() {
-        if (disabled) return;
+  const auth = useSelector((state) => state.auth)
 
-        switch (type) {
-            case 'thread':
-                vote.upVotesBy.includes(auth.id) ?
-                    dispatch(asyncThread.asyncCancelVoteThread(vote.id))
-                    :
-                    dispatch(asyncThread.asyncUpvoteThread(vote.id));
+  function handleVoteUp () {
+    if (disabled) return
 
-                break;
-            case 'comment':
-                vote.upVotesBy.includes(auth.id) ?
-                    dispatch(asyncThread.asyncCancelVoteComment(id, vote.id))
-                    :
-                    dispatch(asyncThread.asyncUpvoteComment(id, vote.id));
+    switch (type) {
+      case 'thread':
+        vote.upVotesBy.includes(auth.id)
+          ? dispatch(asyncThread.asyncCancelVoteThread(vote.id))
+          : dispatch(asyncThread.asyncUpvoteThread(vote.id))
 
-                break;
-            default:
-        }
+        break
+      case 'comment':
+        vote.upVotesBy.includes(auth.id)
+          ? dispatch(asyncThread.asyncCancelVoteComment(id, vote.id))
+          : dispatch(asyncThread.asyncUpvoteComment(id, vote.id))
+
+        break
+      default:
     }
+  }
 
-    function handleVoteDown() {
-        if (disabled) return;
+  function handleVoteDown () {
+    if (disabled) return
 
-        switch (type) {
-            case 'thread':
-                vote.downVotesBy.includes(auth.id) ?
-                    dispatch(asyncThread.asyncCancelVoteThread(vote.id))
-                    :
-                    dispatch(asyncThread.asyncDownvoteThread(vote.id));
+    switch (type) {
+      case 'thread':
+        vote.downVotesBy.includes(auth.id)
+          ? dispatch(asyncThread.asyncCancelVoteThread(vote.id))
+          : dispatch(asyncThread.asyncDownvoteThread(vote.id))
 
-                break;
-            case 'comment':
-                vote.downVotesBy.includes(auth.id) ?
-                    dispatch(asyncThread.asyncCancelVoteComment(id, vote.id))
-                    :
-                    dispatch(asyncThread.asyncDownvoteComment(id, vote.id));
-                break;
-            default:
-        }
+        break
+      case 'comment':
+        vote.downVotesBy.includes(auth.id)
+          ? dispatch(asyncThread.asyncCancelVoteComment(id, vote.id))
+          : dispatch(asyncThread.asyncDownvoteComment(id, vote.id))
+        break
+      default:
     }
+  }
 
-    return (
+  return (
         <div className="button-tooltips text-muted">
             <button
                 className={`button-tooltip ${disabled ? 'no-clicked' : ''}`}
@@ -62,8 +60,8 @@ export default function Tooltips({ vote, children, type, disabled = false }) {
             >
                 <span className="icon-text">
                     {vote.upVotesBy.includes(auth.id)
-                        ? <FaThumbsUp className='me-1' />
-                        : <FaRegThumbsUp className='me-1' />
+                      ? <FaThumbsUp className='me-1' />
+                      : <FaRegThumbsUp className='me-1' />
                     }
                     {vote.upVotesBy.length}
                 </span>
@@ -74,8 +72,8 @@ export default function Tooltips({ vote, children, type, disabled = false }) {
             >
                 <span className="icon-text">
                     {vote.downVotesBy.includes(auth.id)
-                        ? <FaThumbsDown className='me-1' />
-                        : <FaRegThumbsDown className='me-1' />
+                      ? <FaThumbsDown className='me-1' />
+                      : <FaRegThumbsDown className='me-1' />
                     }
                     {vote.downVotesBy.length}
                 </span>
@@ -83,12 +81,12 @@ export default function Tooltips({ vote, children, type, disabled = false }) {
 
             {children}
         </div>
-    )
+  )
 }
 
 Tooltips.propTypes = {
-    vote: propTypes.object.isRequired,
-    children: propTypes.node,
-    type: propTypes.oneOf(['thread', 'comment']),
-    disabled: propTypes.bool
+  vote: propTypes.object.isRequired,
+  children: propTypes.node,
+  type: propTypes.oneOf(['thread', 'comment']),
+  disabled: propTypes.bool
 }

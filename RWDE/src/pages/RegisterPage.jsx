@@ -1,33 +1,34 @@
-import { Form, Row, Col, Button, Image } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import React from 'react'
 
-import useTitle from '../hooks/useTitle';
-import useInput from '../hooks/useInput';
-import authActions from '../states/auth/action';
+import { Form, Row, Col, Button, Image } from 'react-bootstrap'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
-export function RegisterPage() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+import useTitle from '../hooks/useTitle'
+import useInput from '../hooks/useInput'
+import authActions from '../states/auth/action'
 
-    useTitle("Register - Open Threads");
+export function RegisterPage () {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
+  useTitle('Register - Open Threads')
 
-    const [name, setName] = useInput("");
-    const [email, setEmail] = useInput("");
-    const [password, setPassword] = useInput("");
+  const [name, setName] = useInput('')
+  const [email, setEmail] = useInput('')
+  const [password, setPassword] = useInput('')
 
-    async function handleSubmit(event) {
-        event.preventDefault();
-        try {
-            await dispatch(authActions.asyncRegister({ name, email, password }));
-            navigate('/login');
-        } catch (err) {
-            alert(err.message);
-        }
+  async function handleSubmit (event) {
+    event.preventDefault()
+    try {
+      await dispatch(authActions.asyncRegister({ name, email, password }))
+      navigate('/login')
+    } catch (err) {
+      alert(err.message)
     }
+  }
 
-    return (
+  return (
         <Row className="justify-content-center">
             <Col md={4}>
                 <div className="d-flex align-items-center justify-content-center mb-4">
@@ -59,5 +60,5 @@ export function RegisterPage() {
                 </Form>
             </Col>
         </Row>
-    );
+  )
 }

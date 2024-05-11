@@ -1,69 +1,69 @@
-import { Col, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Col, Row } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
-import useTitle from "../hooks/useTitle";
-import Category from "../components/category";
-import Leaderboard from "../components/leaderboard";
-import OverviewThreads from "../components/thread/OverviewThreads";
+import useTitle from '../hooks/useTitle'
+import Category from '../components/category'
+import Leaderboard from '../components/leaderboard'
+import OverviewThreads from '../components/thread/OverviewThreads'
 
-import asyncUsers from "../states/users/action";
-import asyncThreads from "../states/threads/action";
-import asyncLeaderboard from "../states/leaderboard/action";
+import asyncUsers from '../states/users/action'
+import asyncThreads from '../states/threads/action'
+import asyncLeaderboard from '../states/leaderboard/action'
 
-export default function HomePage() {
-    useTitle("Home - Open Threads");
+export default function HomePage () {
+  useTitle('Home - Open Threads')
 
-    const dispatch = useDispatch();
-    const [searchParams] = useSearchParams();
-    const category = searchParams.get("category");
+  const dispatch = useDispatch()
+  const [searchParams] = useSearchParams()
+  const category = searchParams.get('category')
 
-    const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true)
 
-    const threads = useSelector((state) => state.threads);
-    const users = useSelector((state) => state.users);
-    const leaderboards = useSelector((state) => state.leaderboard);
+  const threads = useSelector((state) => state.threads)
+  const users = useSelector((state) => state.users)
+  const leaderboards = useSelector((state) => state.leaderboard)
 
-    useEffect(() => {
-        const fetchData = async () => {
-            await dispatch(asyncUsers.asyncGetUsers());
-            await dispatch(asyncThreads.asyncGetThreads());
-            await dispatch(asyncLeaderboard.asyncSetLeaderboard());
-            setIsLoading(false);
-        };
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(asyncUsers.asyncGetUsers())
+      await dispatch(asyncThreads.asyncGetThreads())
+      await dispatch(asyncLeaderboard.asyncSetLeaderboard())
+      setIsLoading(false)
+    }
 
-        fetchData();
-    }, [dispatch]);
+    fetchData()
+  }, [dispatch])
 
-    const categories = useMemo(() => {
-        const categorySet = new Set();
+  const categories = useMemo(() => {
+    const categorySet = new Set()
 
-        if (threads) {
-            threads.forEach((thread) => {
-                categorySet.add(thread.category);
-            });
-        }
+    if (threads) {
+      threads.forEach((thread) => {
+        categorySet.add(thread.category)
+      })
+    }
 
-        return Array.from(categorySet);
-    }, [threads]);
+    return Array.from(categorySet)
+  }, [threads])
 
-    const finalThreads = useMemo(() => {
-        let threadList = threads;
+  const finalThreads = useMemo(() => {
+    let threadList = threads
 
-        if (category) {
-            threadList = threadList.filter((thread) => thread.category === category);
-        }
+    if (category) {
+      threadList = threadList.filter((thread) => thread.category === category)
+    }
 
-        return threadList.map((thread) => {
-            return {
-                ...thread,
-                owner: users.find((user) => user.id === thread.ownerId),
-            }
-        });
-    }, [category, threads, users]);
+    return threadList.map((thread) => {
+      return {
+        ...thread,
+        owner: users.find((user) => user.id === thread.ownerId)
+      }
+    })
+  }, [category, threads, users])
 
-    return (
+  return (
         <Row className="g-2">
             <Col md={4}>
                 <Row>
@@ -81,5 +81,5 @@ export default function HomePage() {
                 <OverviewThreads isLoading={isLoading} threads={finalThreads} />
             </Col>
         </Row>
-    )
+  )
 }

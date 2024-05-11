@@ -1,12 +1,14 @@
-import propTypes from 'prop-types';
-import { Card } from 'react-bootstrap';
-import { FaRegClock } from 'react-icons/fa';
+import React from 'react'
 
-import Tooltips from '../tooltips';
-import { parsingtoHTML, showFormattedDate } from '../../utils';
+import propTypes from 'prop-types'
+import { Card } from 'react-bootstrap'
+import { FaRegClock } from 'react-icons/fa'
 
-export default function ThreadContent({ thread }) {
-    return (
+import Tooltips from '../tooltips'
+import { parsingtoHTML, showFormattedDate } from '../../utils'
+
+export default function ThreadContent ({ thread }) {
+  return (
         <Card>
             <Card.Header>
                 <Card.Title>
@@ -43,9 +45,9 @@ export default function ThreadContent({ thread }) {
                 </Card.Subtitle>
             </Card.Body>
         </Card>
-    );
+  )
 }
 
 ThreadContent.propTypes = {
-    thread: propTypes.object.isRequired
+  thread: propTypes.object.isRequired
 }

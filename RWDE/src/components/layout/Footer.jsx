@@ -1,11 +1,12 @@
-import { Container, Row, Col } from 'react-bootstrap';
-import { FaUserCircle } from 'react-icons/fa';
+import React from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
+import { FaUserCircle } from 'react-icons/fa'
 
-export default function Footer() {
-    const year = new Date().getFullYear();
-    const user = "User"; // Replace this with actual logged in user
+export default function Footer () {
+  const year = new Date().getFullYear()
+  const user = 'User' // Replace this with actual logged in user
 
-    return (
+  return (
         <footer className="d-flex flex-wrap border-top bg-body-tertiary fixed-bottom justify-content-center py-2">
             <Container>
                 <Row>
@@ -18,5 +19,5 @@ export default function Footer() {
                 </Row>
             </Container>
         </footer >
-    );
+  )
 }

@@ -1,17 +1,17 @@
 export const tokenHandler = {
-    setToken: (token) => {
-        localStorage.setItem('token', token);
-    },
+  setToken: (token) => {
+    localStorage.setItem('token', token)
+  },
 
-    getToken: () => {
-        return localStorage.getItem('token');
-    },
+  getToken: () => {
+    return localStorage.getItem('token')
+  },
 
-    removeToken: () => {
-        localStorage.removeItem('token');
-    },
+  removeToken: () => {
+    localStorage.removeItem('token')
+  },
 
-    hasToken: () => {
-        return localStorage.getItem('token') !== null;
-    }
+  hasToken: () => {
+    return localStorage.getItem('token') !== null
+  }
 }

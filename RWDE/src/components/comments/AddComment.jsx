@@ -1,22 +1,22 @@
-import { Button, Card, Form, Image, ListGroup } from 'react-bootstrap';
-import propTypes from 'prop-types';
-import useInput from '../../hooks/useInput';
+import React from 'react'
+import { Button, Card, Form, Image, ListGroup } from 'react-bootstrap'
+import propTypes from 'prop-types'
+import useInput from '../../hooks/useInput'
+export default function AddComment ({ auth, onSubmit }) {
+  const [content, onContentChange, reset] = useInput('')
 
-export default function AddComment({ auth, onSubmit }) {
-    const [content, onContentChange, reset] = useInput('');
+  function handleSubmit (e) {
+    e.preventDefault()
 
-    function handleSubmit(e) {
-        e.preventDefault();
+    if (!content) return
+    onSubmit(content)
+    reset()
 
-        if (!content) return;
-        onSubmit(content);
-        reset();
+    // set content to empty
+    document.querySelector('.input-markdown').textContent = ''
+  }
 
-        // set content to empty
-        document.querySelector('.input-markdown').textContent = '';
-    }
-
-    return (
+  return (
         <Card className='mb-3'>
             <Card.Body>
                 <Card.Title className="mb-3">Add Comment</Card.Title>
@@ -49,10 +49,10 @@ export default function AddComment({ auth, onSubmit }) {
                 </Form>
             </Card.Body>
         </Card>
-    )
+  )
 }
 
 AddComment.propTypes = {
-    auth: propTypes.object.isRequired,
-    onSubmit: propTypes.func.isRequired
+  auth: propTypes.object.isRequired,
+  onSubmit: propTypes.func.isRequired
 }

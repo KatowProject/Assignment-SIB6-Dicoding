@@ -1,9 +1,11 @@
-import { Container, Row, Col } from 'react-bootstrap';
-import { FaArrowLeft } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import React from 'react'
 
-function Error500() {
-    return (
+import { Container, Row, Col } from 'react-bootstrap'
+import { FaArrowLeft } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+
+function Error500 () {
+  return (
         <Container className="d-flex align-items-center justify-content-center vh-100">
             <Row>
                 <Col md={12} className="text-center">
@@ -16,7 +18,7 @@ function Error500() {
                 </Col>
             </Row>
         </Container>
-    );
+  )
 }
 
-export default Error500;
+export default Error500

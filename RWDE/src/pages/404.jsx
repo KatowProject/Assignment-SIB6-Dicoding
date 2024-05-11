@@ -1,7 +1,8 @@
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import React from 'react'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 
-function Error404() {
-    return (
+function Error404 () {
+  return (
         <Container className="d-flex align-items-center justify-content-center vh-100">
             <Row>
                 <Col md={12} className="text-center">
@@ -12,7 +13,7 @@ function Error404() {
                 </Col>
             </Row>
         </Container>
-    );
+  )
 }
 
-export default Error404;
+export default Error404

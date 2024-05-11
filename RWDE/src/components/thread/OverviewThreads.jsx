@@ -1,13 +1,15 @@
-import { Card, Row } from 'react-bootstrap';
-import { RiChatNewLine } from "react-icons/ri";
-import propTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React from 'react'
 
-import OverviewThreadItem from './OverviewThreadItem';
-import PartialLoading from '../loading/PartialLoading';
+import { Card, Row } from 'react-bootstrap'
+import { RiChatNewLine } from 'react-icons/ri'
+import propTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
-export default function OverviewThreads({ isLoading, threads = [] }) {
-    return (
+import OverviewThreadItem from './OverviewThreadItem'
+import PartialLoading from '../loading/PartialLoading'
+
+export default function OverviewThreads ({ isLoading, threads = [] }) {
+  return (
         <Card>
             <Card.Header className="d-flex align-items-center justify-content-between">
                 <Card.Title className="mb-0">Threads</Card.Title>
@@ -18,10 +20,9 @@ export default function OverviewThreads({ isLoading, threads = [] }) {
             </Card.Header>
             <Card.Body>
                 <Row>
-                    {isLoading ?
-                        <PartialLoading />
-                        :
-                        threads.map((thread) =>
+                    {isLoading
+                      ? <PartialLoading />
+                      : threads.map((thread) =>
                         (
                             <OverviewThreadItem
                                 key={thread.id}
@@ -33,10 +34,10 @@ export default function OverviewThreads({ isLoading, threads = [] }) {
                 </Row>
             </Card.Body>
         </Card>
-    )
+  )
 }
 
 OverviewThreads.propTypes = {
-    threads: propTypes.array.isRequired,
-    isLoading: propTypes.bool
+  threads: propTypes.array.isRequired,
+  isLoading: propTypes.bool
 }

@@ -1,33 +1,33 @@
-import { Button, Card, Col, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React from 'react'
+import { Button, Card, Col, Form, Row } from 'react-bootstrap'
+import { Link, useNavigate } from 'react-router-dom'
+import { FaArrowLeft } from 'react-icons/fa'
+import { useDispatch } from 'react-redux'
 
-import useInput from "../hooks/useInput";
-import asyncThread from '../states/threads/action';
+import useInput from '../hooks/useInput'
+import asyncThread from '../states/threads/action'
 
-export default function CreateThread() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+export default function CreateThread () {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-    const [title, onTitleChange] = useInput('');
-    const [category, onCategoryChange] = useInput('');
-    const [content, onContentChange] = useInput('');
+  const [title, onTitleChange] = useInput('')
+  const [category, onCategoryChange] = useInput('')
+  const [content, onContentChange] = useInput('')
 
-    async function onSubmit(e) {
-        e.preventDefault();
+  async function onSubmit (e) {
+    e.preventDefault()
 
-        try {
-            dispatch(asyncThread.asyncCreateThreads(title, category, content));
+    try {
+      dispatch(asyncThread.asyncCreateThreads(title, category, content))
 
-            alert('Thread created successfully');
-            navigate('/');
-        } catch (error) {
-            alert(error.message);
-        }
+      alert('Thread created successfully')
+      navigate('/')
+    } catch (error) {
+      alert(error.message)
     }
-    return (
+  }
+  return (
         <Row className="justify-content-center">
             <Col xl={10} className="mb-3">
                 <Link to="/" className="back-link">
@@ -73,5 +73,5 @@ export default function CreateThread() {
                 </Card>
             </Col>
         </Row>
-    );
+  )
 }

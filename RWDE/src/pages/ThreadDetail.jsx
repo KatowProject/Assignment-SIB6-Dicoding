@@ -1,43 +1,43 @@
-import { Row, Col } from "react-bootstrap";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
+import { Row, Col } from 'react-bootstrap'
+import { useParams, Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react'
 
-import useTitle from "../hooks/useTitle";
-import asyncThread from "../states/thread/action";
+import { FaArrowLeft } from 'react-icons/fa'
 
-import PartialLoading from "../components/loading/PartialLoading";
-import ThreadContent from "../components/thread/ThreadContent";
-import Comments from "../components/comments";
+import useTitle from '../hooks/useTitle'
+import asyncThread from '../states/thread/action'
 
-export default function ThreadDetail() {
-    useTitle("Thread Detail - Open Threads");
+import PartialLoading from '../components/loading/PartialLoading'
+import ThreadContent from '../components/thread/ThreadContent'
+import Comments from '../components/comments'
 
-    const dispatch = useDispatch();
+export default function ThreadDetail () {
+  useTitle('Thread Detail - Open Threads')
 
-    const thread = useSelector((state) => state.thread);
-    const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
 
+  const thread = useSelector((state) => state.thread)
+  const auth = useSelector((state) => state.auth)
 
-    const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true)
 
-    const { id } = useParams();
+  const { id } = useParams()
 
-    useEffect(() => {
-        const fetchData = async () => {
-            await dispatch(asyncThread.asyncGetThread(id));
-            setIsLoading(false);
-        };
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(asyncThread.asyncGetThread(id))
+      setIsLoading(false)
+    }
 
-        fetchData();
-    }, [dispatch, id]);
+    fetchData()
+  }, [dispatch, id])
 
-
-    return (
+  return (
         <>
-            {isLoading ? <PartialLoading /> : (
+            {isLoading
+              ? <PartialLoading />
+              : (
                 <Row>
                     <Col xl={10} className="mb-3">
                         <Link to="/" className="back-link">
@@ -53,7 +53,7 @@ export default function ThreadDetail() {
                         <Comments thread={thread} auth={auth} />
                     </Col>
                 </Row>
-            )}
+                )}
         </>
-    );
+  )
 }

@@ -1,11 +1,11 @@
-import propTypes from 'prop-types';
-import { ListGroup, Image } from 'react-bootstrap';
-import { parsingtoHTML, showFormattedDate } from '../../utils';
+import React from 'react'
+import propTypes from 'prop-types'
+import { ListGroup, Image } from 'react-bootstrap'
+import { parsingtoHTML, showFormattedDate } from '../../utils'
+import Tooltips from '../tooltips'
 
-import Tooltips from '../tooltips';
-
-export default function CommentList({ comment }) {
-    return (
+export default function CommentList ({ comment }) {
+  return (
         <ListGroup.Item>
             <div className="d-flex align-items-start py-2">
                 <Image src={comment.owner.avatar} alt="Profile" roundedCircle className="me-2" />
@@ -22,9 +22,9 @@ export default function CommentList({ comment }) {
                 </div>
             </div>
         </ListGroup.Item>
-    );
+  )
 }
 
 CommentList.propTypes = {
-    comment: propTypes.object.isRequired
-}   
+  comment: propTypes.object.isRequired
+}
